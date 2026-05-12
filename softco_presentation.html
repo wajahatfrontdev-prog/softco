@@ -1,0 +1,1807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Softco Digital — Company Profile & Portfolio</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap');
+
+  *{margin:0;padding:0;box-sizing:border-box}
+
+  :root{
+    --navy:#020818;
+    --navy2:#050f2e;
+    --blue:#0ea5e9;
+    --blue2:#38bdf8;
+    --purple:#8b5cf6;
+    --purple2:#a78bfa;
+    --pink:#ec4899;
+    --glow-blue:0 0 40px rgba(14,165,233,0.4);
+    --glow-purple:0 0 40px rgba(139,92,246,0.4);
+    --glow-pink:0 0 40px rgba(236,72,153,0.3);
+    --glass:rgba(255,255,255,0.04);
+    --glass-border:rgba(255,255,255,0.1);
+    --text:#f8fafc;
+    --muted:#94a3b8;
+    --font:'Space Grotesk',sans-serif;
+  }
+
+  html{scroll-behavior:smooth}
+  body{background:var(--navy);color:var(--text);font-family:var(--font);overflow-x:hidden;line-height:1.6}
+
+  /* NAV */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0.85rem 3rem;
+    background:rgba(2,8,24,0.85);
+    backdrop-filter:blur(20px);
+    border-bottom:1px solid var(--glass-border);
+  }
+  .nav-logo img{width:80px;height:80px;object-fit:contain;background:#fff;border-radius:8px}
+  .nav-dots{display:flex;gap:7px}
+  .nav-dot{width:7px;height:7px;border-radius:50%;cursor:pointer;transition:all 0.3s;border:1px solid var(--glass-border);background:var(--glass)}
+  .nav-dot.active{background:var(--blue);box-shadow:0 0 8px var(--blue);border-color:var(--blue)}
+  .nav-links{display:flex;gap:0.5rem;align-items:center}
+  .nav-tag{font-size:0.72rem;color:var(--muted);letter-spacing:1px;margin-right:0.5rem}
+  .nav-cta{padding:0.45rem 1.4rem;border-radius:50px;background:linear-gradient(135deg,var(--blue),var(--purple));font-size:0.82rem;font-weight:600;color:#fff;cursor:pointer;border:none;box-shadow:var(--glow-blue);transition:transform 0.2s}
+  .nav-cta:hover{transform:scale(1.05)}
+
+  /* SLIDES */
+  .slides-wrapper{padding-top:70px}
+  .slide{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:5rem 4rem;position:relative;overflow:hidden}
+
+  /* BG EFFECTS */
+  .orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;animation:pulse 6s ease-in-out infinite alternate}
+  @keyframes pulse{0%{opacity:0.3;transform:scale(1)}100%{opacity:0.7;transform:scale(1.1)}}
+  @keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-20px)}100%{transform:translateY(0)}}
+  @keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @keyframes bounce{0%,100%{transform:rotate(45deg) translateY(0)}50%{transform:rotate(45deg) translateY(6px)}}
+  @keyframes bounceHand{0%,100%{transform:translateY(0) rotate(-10deg)}50%{transform:translateY(-8px) rotate(-10deg)}}
+
+  .slide-label{font-size:0.7rem;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--blue);margin-bottom:1rem;display:flex;align-items:center;gap:8px}
+  .slide-label::before{content:'';width:24px;height:1px;background:var(--blue)}
+
+  h1.hero-title{font-size:clamp(3.5rem,7vw,7rem);font-weight:900;line-height:1;letter-spacing:-3px;background:linear-gradient(135deg,#fff 0%,var(--blue2) 40%,var(--purple2) 70%,#fff 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shimmer 4s linear infinite;margin-bottom:1.5rem}
+  h2.section-title{font-size:clamp(2rem,4vw,3.5rem);font-weight:800;line-height:1.1;letter-spacing:-1px;background:linear-gradient(135deg,#fff,var(--blue2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1rem}
+
+  .hero-sub{font-size:1.1rem;color:var(--muted);max-width:600px;margin-bottom:2.5rem;line-height:1.8}
+
+  .btn-primary{display:inline-flex;align-items:center;gap:8px;padding:0.9rem 2.5rem;border-radius:50px;background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;font-weight:700;font-size:0.95rem;border:none;cursor:pointer;box-shadow:var(--glow-blue);transition:transform 0.2s,box-shadow 0.2s;text-decoration:none}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 60px rgba(14,165,233,0.5)}
+  .btn-ghost{display:inline-flex;align-items:center;gap:8px;padding:0.9rem 2.5rem;border-radius:50px;background:var(--glass);border:1px solid var(--glass-border);color:#fff;font-weight:600;font-size:0.95rem;cursor:pointer;backdrop-filter:blur(10px);transition:all 0.2s;text-decoration:none}
+  .btn-ghost:hover{border-color:var(--blue);box-shadow:var(--glow-blue)}
+
+  /* CARDS */
+  .glass-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:20px;padding:2rem;backdrop-filter:blur(20px);transition:all 0.3s;position:relative;overflow:hidden}
+  .glass-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent)}
+  .glass-card:hover{border-color:rgba(14,165,233,0.4);box-shadow:var(--glow-blue);transform:translateY(-4px)}
+
+  .glow-card{background:linear-gradient(135deg,rgba(14,165,233,0.08),rgba(139,92,246,0.08));border:1px solid rgba(14,165,233,0.2);border-radius:20px;padding:1.75rem;position:relative;overflow:hidden;transition:all 0.3s}
+  .glow-card:hover{border-color:rgba(14,165,233,0.5);box-shadow:0 0 30px rgba(14,165,233,0.2),0 0 60px rgba(139,92,246,0.1);transform:translateY(-4px)}
+  .glow-card .card-icon{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1rem;box-shadow:var(--glow-blue)}
+  .glow-card h3{font-size:1rem;font-weight:700;margin-bottom:0.5rem;color:#fff}
+  .glow-card p{font-size:0.83rem;color:var(--muted);line-height:1.7}
+
+  /* GRIDS */
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+  .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}
+
+  /* STAT */
+  .stat-block{text-align:center;padding:1.5rem}
+  .stat-number{font-size:3rem;font-weight:900;line-height:1;background:linear-gradient(135deg,var(--blue),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:block;margin-bottom:0.25rem}
+  .stat-label{font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:2px}
+
+  /* DIVIDER */
+  .glow-divider{width:80px;height:3px;border-radius:2px;background:linear-gradient(90deg,var(--blue),var(--purple));margin:1rem 0 2rem;box-shadow:var(--glow-blue)}
+
+  /* BADGE */
+  .badge{display:inline-block;padding:0.3rem 1rem;border-radius:50px;font-size:0.75rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;background:linear-gradient(135deg,rgba(14,165,233,0.15),rgba(139,92,246,0.15));border:1px solid rgba(14,165,233,0.3);color:var(--blue2);margin-bottom:1rem}
+
+  /* TESTIMONIAL */
+  .testi-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:20px;padding:2rem;backdrop-filter:blur(20px);position:relative}
+  .testi-card::before{content:'"';position:absolute;top:1rem;right:1.5rem;font-size:5rem;font-weight:900;line-height:1;background:linear-gradient(135deg,var(--blue),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;opacity:0.3}
+  .testi-stars{color:#f59e0b;margin-bottom:1rem;font-size:0.9rem;letter-spacing:2px}
+  .testi-text{font-size:0.92rem;color:#cbd5e1;line-height:1.8;margin-bottom:1.5rem}
+  .testi-author{display:flex;align-items:center;gap:12px}
+  .testi-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.9rem;color:#fff;box-shadow:var(--glow-blue)}
+  .testi-name{font-weight:700;font-size:0.9rem;color:#fff}
+  .testi-role{font-size:0.78rem;color:var(--muted)}
+
+  /* FEATURE ROW */
+  .feature-row{display:flex;align-items:flex-start;gap:1.25rem;padding:1.1rem;border-radius:14px;border:1px solid var(--glass-border);background:var(--glass);transition:all 0.3s}
+  .feature-row:hover{border-color:rgba(14,165,233,0.3);box-shadow:var(--glow-blue)}
+  .feature-icon{width:44px;height:44px;border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.3rem}
+  .fi-blue{background:rgba(14,165,233,0.15);border:1px solid rgba(14,165,233,0.3)}
+  .fi-purple{background:rgba(139,92,246,0.15);border:1px solid rgba(139,92,246,0.3)}
+  .fi-pink{background:rgba(236,72,153,0.15);border:1px solid rgba(236,72,153,0.3)}
+  .fi-green{background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.3)}
+  .feature-row h4{font-size:0.93rem;font-weight:700;color:#fff;margin-bottom:0.2rem}
+  .feature-row p{font-size:0.81rem;color:var(--muted);line-height:1.6}
+
+  /* CONTACT */
+  .contact-item{display:flex;align-items:center;gap:1rem;padding:1.2rem 1.5rem;border-radius:14px;background:var(--glass);border:1px solid var(--glass-border);margin-bottom:0.75rem;transition:all 0.3s}
+  .contact-item:hover{border-color:rgba(14,165,233,0.4);box-shadow:var(--glow-blue)}
+  .contact-icon{width:44px;height:44px;border-radius:12px;flex-shrink:0;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;align-items:center;justify-content:center;font-size:1.2rem;box-shadow:var(--glow-blue)}
+  .contact-label{font-size:0.73rem;color:var(--muted);margin-bottom:2px}
+  .contact-value{font-size:0.93rem;font-weight:600;color:#fff}
+
+  /* PORTFOLIO CARD */
+  .portfolio-card{border-radius:20px;overflow:hidden;position:relative;border:1px solid var(--glass-border);background:var(--glass);transition:all 0.3s}
+  .portfolio-card:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(14,165,233,0.15)}
+  .portfolio-thumb{height:150px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+  .portfolio-info{padding:1.2rem}
+  .portfolio-tag{display:inline-block;padding:0.2rem 0.7rem;border-radius:50px;font-size:0.7rem;font-weight:600;margin-bottom:0.5rem;background:rgba(14,165,233,0.15);border:1px solid rgba(14,165,233,0.3);color:var(--blue2)}
+  .portfolio-name{font-size:0.95rem;font-weight:700;color:#fff;margin-bottom:0.2rem}
+  .portfolio-client{font-size:0.8rem;color:var(--muted);margin-bottom:0.3rem}
+  .portfolio-desc{font-size:0.78rem;color:var(--muted);line-height:1.5}
+  .metric-pill{display:inline-flex;align-items:center;gap:4px;padding:0.2rem 0.75rem;border-radius:50px;font-size:0.72rem;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--blue),var(--purple));margin-top:0.5rem}
+
+  /* PROGRESS BAR */
+  .progress-bar{height:6px;border-radius:3px;background:rgba(255,255,255,0.05);overflow:hidden;margin-top:6px}
+  .progress-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--blue),var(--purple));box-shadow:var(--glow-blue)}
+
+  /* SCROLL */
+  .scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--muted);font-size:0.7rem;letter-spacing:2px;text-transform:uppercase}
+  .scroll-arrow{width:24px;height:24px;border-right:2px solid var(--blue);border-bottom:2px solid var(--blue);transform:rotate(45deg);animation:bounce 2s ease-in-out infinite}
+
+  /* COUNTER */
+  .slide-counter{position:absolute;bottom:2rem;right:4rem;font-size:0.75rem;color:var(--muted);letter-spacing:2px}
+  .slide-counter span{color:var(--blue);font-weight:700}
+
+  /* HERO VISUAL */
+  .hero-visual{position:absolute;right:3rem;top:50%;transform:translateY(-50%);width:36%;pointer-events:none;animation:float 6s ease-in-out infinite}
+
+  /* ORBIT */
+  .orbit-container{position:relative;width:260px;height:260px;margin:0 auto}
+  .orbit-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:76px;height:76px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:900;color:#fff;box-shadow:var(--glow-blue);z-index:2;overflow:hidden}
+  .orbit-center img{width:100%;height:100%;object-fit:contain;padding:8px}
+  .orbit-ring{position:absolute;top:50%;left:50%;border-radius:50%;border:1px solid rgba(14,165,233,0.2);animation:spin 12s linear infinite}
+  .orbit-ring:nth-child(2){width:150px;height:150px;margin:-75px 0 0 -75px;animation-duration:8s}
+  .orbit-ring:nth-child(3){width:220px;height:220px;margin:-110px 0 0 -110px;animation-duration:15s;animation-direction:reverse}
+  .orbit-dot{position:absolute;width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));box-shadow:var(--glow-blue);top:-5px;left:50%;margin-left:-5px}
+
+  /* MOCK BROWSER */
+  .mock-browser{border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.1);background:#0d1117;box-shadow:0 20px 60px rgba(0,0,0,0.5)}
+  .mock-bar{height:36px;background:#1a1f2e;display:flex;align-items:center;padding:0 12px;gap:8px}
+  .mock-dot{width:10px;height:10px;border-radius:50%}
+  .mock-url{flex:1;height:20px;border-radius:4px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);margin:0 12px;display:flex;align-items:center;padding:0 8px;font-size:0.7rem;color:var(--muted)}
+
+  /* GRID BG */
+  .grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(14,165,233,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(14,165,233,0.03) 1px,transparent 1px);background-size:50px 50px;pointer-events:none}
+
+  /* EXPERTISE BAR */
+  .expertise-item{margin-bottom:1.25rem}
+  .expertise-label{display:flex;justify-content:space-between;font-size:0.85rem;margin-bottom:6px}
+  .expertise-label span:first-child{color:#e2e8f0;font-weight:600}
+  .expertise-label span:last-child{color:var(--blue2);font-weight:700}
+
+  /* CLIENT LOGO AREA */
+  .client-badge{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.25rem;border-radius:16px;background:var(--glass);border:1px solid var(--glass-border);transition:all 0.3s;gap:0.5rem}
+  .client-badge:hover{border-color:rgba(14,165,233,0.35);box-shadow:var(--glow-blue);transform:translateY(-3px)}
+  .client-badge .c-avatar{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;color:#fff}
+  .client-badge .c-name{font-size:0.82rem;font-weight:700;color:#fff;text-align:center}
+  .client-badge .c-loc{font-size:0.7rem;color:var(--muted);text-align:center}
+  .client-badge .c-service{font-size:0.68rem;padding:2px 8px;border-radius:50px;margin-top:2px}
+
+  /* LOCATION TAG */
+  .loc-pill{display:inline-flex;align-items:center;gap:5px;padding:0.35rem 0.85rem;border-radius:50px;font-size:0.75rem;font-weight:600;background:rgba(14,165,233,0.1);border:1px solid rgba(14,165,233,0.25);color:var(--blue2)}
+
+  /* ── Hero Premium ── */
+  @keyframes scrollLine{0%,100%{opacity:0;transform:scaleY(0.3)}50%{opacity:1;transform:scaleY(1)}}
+  @keyframes scrollDot{0%,100%{opacity:0.3;transform:scale(0.7)}50%{opacity:1;transform:scale(1.2)}}
+  @keyframes gradShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+  .hero-logo-wrap{margin-bottom:1.5rem;position:relative;display:inline-block}
+  .hero-logo-glow{position:absolute;inset:-40px;background:radial-gradient(ellipse,rgba(37,99,235,0.4),transparent 70%);filter:blur(45px);pointer-events:none;z-index:0}
+  .hero-logo-img{position:relative;z-index:1;width:clamp(300px,44vw,580px);max-width:calc(100vw - 4rem);display:block;filter:brightness(1.55) drop-shadow(0 0 24px rgba(70,109,181,0.95)) drop-shadow(0 0 60px rgba(70,109,181,0.55)) contrast(1.08) saturate(1.25)}
+  .gradient-text{background:linear-gradient(90deg,#60a5fa,#a855f7,#60a5fa);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:gradShift 4s linear infinite}
+  .btn-hero-primary{display:inline-flex;align-items:center;gap:8px;padding:16px 34px;background:linear-gradient(90deg,#3b82f6,#8b5cf6);border:none;border-radius:14px;font-size:0.95rem;font-weight:600;color:#fff;cursor:pointer;box-shadow:0 10px 40px rgba(59,130,246,0.35);transition:all 0.3s;font-family:var(--font);text-decoration:none}
+  .btn-hero-primary:hover{transform:translateY(-4px);box-shadow:0 20px 50px rgba(59,130,246,0.5)}
+  .btn-hero-ghost{display:inline-flex;align-items:center;gap:8px;padding:16px 34px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.12);border-radius:14px;font-size:0.95rem;font-weight:600;color:#fff;cursor:pointer;backdrop-filter:blur(10px);transition:all 0.3s;text-decoration:none;font-family:var(--font)}
+  .btn-hero-ghost:hover{border-color:rgba(59,130,246,0.5);box-shadow:0 0 30px rgba(59,130,246,0.2);transform:translateY(-2px)}
+  .stats-glass{background:rgba(8,14,28,0.72);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border:1px solid rgba(255,255,255,0.07);border-radius:28px;padding:2rem;box-shadow:0 0 40px rgba(59,130,246,0.18),0 30px 60px rgba(0,0,0,0.5);position:relative;overflow:hidden}
+  .stats-glass::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(59,130,246,0.05),rgba(139,92,246,0.05));pointer-events:none}
+  .hero-scroll-indicator{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;z-index:5}
+  .hero-scroll-line{width:1px;height:42px;background:linear-gradient(to bottom,transparent,rgba(99,102,241,0.85));animation:scrollLine 2s ease-in-out infinite}
+  .hero-scroll-dot{width:6px;height:6px;border-radius:50%;background:#6366f1;box-shadow:0 0 10px #6366f1,0 0 20px rgba(99,102,241,0.5);animation:scrollDot 2s ease-in-out infinite}
+  .hero-grid{display:grid;grid-template-columns:1.2fr 0.8fr;align-items:center;gap:5rem;width:100%;position:relative;z-index:1}
+
+  /* ── Showcase Carousel ── */
+  #clientTrack{display:flex;gap:1.5rem;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding:1.5rem 4rem 2.5rem}
+  #clientTrack::-webkit-scrollbar{display:none}
+  .sc-card{min-width:340px;width:340px;scroll-snap-align:start;border-radius:24px;overflow:hidden;flex-shrink:0;cursor:pointer;box-shadow:0 20px 60px rgba(0,0,0,0.45);transition:transform 0.45s cubic-bezier(0.34,1.1,0.64,1),box-shadow 0.4s ease}
+  .sc-card:hover{transform:translateY(-10px) scale(1.02)}
+  .sc-preview{height:248px;position:relative;overflow:hidden}
+  .sc-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(2,8,24,0.93) 0%,rgba(2,8,24,0.28) 52%,transparent 100%);pointer-events:none;z-index:3}
+  @keyframes floatChip{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+  .sc-chip{position:absolute;border-radius:10px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(4,9,22,0.82);border:1px solid rgba(255,255,255,0.1);animation:floatChip 4s ease-in-out infinite;z-index:4;padding:6px 8px}
+  .sc-info{padding:1.15rem 1.3rem 1.3rem;background:linear-gradient(135deg,rgba(255,255,255,0.045),rgba(255,255,255,0.02));border:1px solid rgba(255,255,255,0.07);border-top:none;border-radius:0 0 24px 24px}
+  .sc-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:20;width:46px;height:46px;border-radius:50%;background:rgba(2,8,24,0.88);border:1px solid rgba(255,255,255,0.12);color:#fff;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(12px);transition:all 0.3s;box-shadow:0 8px 32px rgba(0,0,0,0.4);line-height:1}
+  .sc-nav:hover{background:rgba(14,165,233,0.18);border-color:rgba(14,165,233,0.45);box-shadow:0 0 28px rgba(14,165,233,0.3)}
+  .sc-dot{height:7px;border-radius:4px;border:none;cursor:pointer;transition:all 0.35s ease;padding:0}
+
+  /* ── Tablet ────────────────────────────────── */
+  @media(max-width:900px){
+    .slide{padding:5rem 2rem}
+    .grid-2,.grid-3,.grid-4{grid-template-columns:1fr}
+    .hero-visual{display:none}
+    nav{padding:1rem 1.5rem}
+    .nav-dots{display:none}
+    #clientTrack{padding:1.5rem 1.5rem 2.5rem}
+    .sc-card{min-width:290px;width:290px}
+  }
+
+  /* ── Mobile ─────────────────────────────────── */
+  @media(max-width:768px){
+    /* Nav */
+    nav{padding:0.7rem 1.1rem}
+    .nav-logo img{width:52px;height:52px}
+    .nav-tag{display:none}
+    .nav-logo > div > div:last-child{display:none}
+
+    /* Slides */
+    .slide{padding:4.5rem 1.25rem 2.5rem}
+    #slide-2,#slide-3,#slide-6{padding:4rem 1.25rem 2.5rem !important}
+
+    /* Typography */
+    h1.hero-title{font-size:clamp(2rem,9vw,3rem);letter-spacing:-1px;margin-bottom:1rem}
+    h2.section-title{font-size:clamp(1.6rem,6vw,2.2rem);letter-spacing:-0.5px}
+    .hero-sub{font-size:0.92rem}
+
+    /* Cover logo */
+    #slide-0 img[alt="Softco Digital"]{
+      width:min(300px,82vw) !important;
+      max-width:82vw !important
+    }
+    .hero-visual{display:none}
+
+    /* Grids → single column */
+    .grid-2,.grid-3,.grid-4{grid-template-columns:1fr;gap:1rem}
+
+    /* Key Numbers – 5-col inline grid */
+    #slide-2 [style*="repeat(5"]{
+      grid-template-columns:repeat(2,1fr) !important;
+      gap:0.85rem !important
+    }
+    /* Services – 4-col inline grid */
+    #slide-3 [style*="repeat(4"]{
+      grid-template-columns:repeat(2,1fr) !important;
+      gap:0.85rem !important
+    }
+    /* Marketing – 2fr 1fr inline */
+    #slide-4 [style*="2fr 1fr"]{
+      grid-template-columns:1fr !important
+    }
+    /* Why Choose Us – 3-col inline */
+    #slide-5 [style*="repeat(3"]{
+      grid-template-columns:1fr !important
+    }
+    /* Testimonials – 3-col */
+    #slide-8 [style*="repeat(3"]{
+      grid-template-columns:1fr !important
+    }
+    /* Portfolio – 3-col */
+    #slide-6 [style*="repeat(3"]{
+      grid-template-columns:1fr !important;
+      gap:1rem !important
+    }
+    /* Customers – 2-col inline */
+    #slide-9 [style*="1fr 1.45fr"]{
+      grid-template-columns:1fr !important;
+      gap:0.75rem !important
+    }
+    #slide-9 [style*="animation:float"]{display:none}
+
+    /* Expertise bars */
+    #slide-2 [style*="grid-template-columns:1fr 1fr"]{
+      grid-template-columns:1fr !important
+    }
+
+    /* Stat blocks */
+    .stat-number{font-size:2rem}
+    .stat-block{padding:1rem}
+
+    /* Cards */
+    .glass-card{padding:1.25rem}
+    .glow-card{padding:1.2rem}
+    .testi-card{padding:1.5rem}
+
+    /* Buttons */
+    .btn-primary,.btn-ghost{padding:0.8rem 1.6rem;font-size:0.9rem}
+
+    /* Feature rows */
+    .feature-row{gap:0.85rem}
+
+    /* Orbit */
+    .orbit-container{width:200px;height:200px}
+
+    /* Scroll hint */
+    .scroll-hint{bottom:1.2rem}
+    .slide-counter{bottom:1.2rem;right:1.5rem}
+
+    /* Client carousel */
+    #clientTrack{padding:1.25rem 1rem 2rem}
+    .sc-card{min-width:260px;width:260px}
+
+    /* Contact items */
+    .contact-item{padding:1rem 1.25rem}
+
+    /* Mock browser – hide on mobile */
+    .mock-browser{display:none}
+
+    /* Slide-9 customers browser mocks hidden */
+    #slide-9 .mock-browser{display:none}
+  }
+
+  /* ── Small Mobile ─────────────────────────── */
+  @media(max-width:480px){
+    nav{padding:0.6rem 0.9rem}
+    .nav-cta{padding:0.38rem 0.9rem;font-size:0.75rem}
+    .nav-logo img{width:44px;height:44px}
+
+    .slide{padding:4.5rem 1rem 2.5rem}
+    h1.hero-title{font-size:clamp(1.9rem,8vw,2.6rem)}
+    h2.section-title{font-size:clamp(1.5rem,6vw,1.9rem)}
+
+    #slide-0 img[alt="Softco Digital"]{
+      width:min(270px,88vw) !important;
+      max-width:88vw !important
+    }
+
+    .btn-primary,.btn-ghost{padding:0.75rem 1.3rem;font-size:0.85rem;border-radius:40px}
+
+    /* Services – single column on very small */
+    #slide-3 [style*="repeat(4"]{
+      grid-template-columns:1fr !important
+    }
+
+    /* Key numbers – 2 cols still ok */
+    .glow-card p,.glass-card p{font-size:0.8rem}
+    .glow-card h3{font-size:0.92rem}
+
+    .contact-item{flex-direction:column;align-items:flex-start;gap:0.5rem}
+    .testi-text{font-size:0.85rem}
+    .portfolio-thumb{height:110px}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo" style="display:flex;align-items:center;gap:14px">
+    <img src="softco.jpg" alt="Softco Digital Logo">
+    <div style="line-height:1.2">
+      <div style="font-size:1.25rem;font-weight:900;background:linear-gradient(135deg,var(--blue),var(--purple2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-0.5px">Softco Digital.</div>
+      <div style="font-size:0.62rem;color:var(--muted);letter-spacing:0.5px">Reimage your business for the digital age</div>
+    </div>
+  </div>
+  <div class="nav-dots" id="navDots"></div>
+  <div class="nav-links">
+    <span class="nav-tag">softcodigitalinc.com</span>
+    <button class="nav-cta" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})">Get in Touch</button>
+  </div>
+</nav>
+
+<div class="slides-wrapper" id="slidesWrapper">
+
+<!-- ═══════════════════════════════════════ -->
+<!-- SLIDE 1 · COVER -->
+<!-- ═══════════════════════════════════════ -->
+<section class="slide" id="slide-0" style="background:linear-gradient(135deg,#020818 0%,#050f2e 50%,#0a0820 100%)">
+  <div class="orb" style="width:600px;height:600px;background:radial-gradient(circle,rgba(14,165,233,0.15),transparent 70%);top:-200px;right:-100px"></div>
+  <div class="orb" style="width:500px;height:500px;background:radial-gradient(circle,rgba(139,92,246,0.12),transparent 70%);bottom:-150px;left:-100px;animation-delay:3s"></div>
+  <div class="grid-bg"></div>
+
+  <div style="position:relative;z-index:1;max-width:620px">
+    <div class="badge" style="margin-bottom:0.75rem">Est. · New Jersey, USA · 11 Years of Excellence</div>
+    <!-- SoftCo. Logo — no background, full visibility -->
+    <div style="margin-bottom:0.75rem;position:relative;display:inline-block">
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:720px;height:360px;background:radial-gradient(ellipse,rgba(68,114,196,0.6),transparent 65%);filter:blur(80px);pointer-events:none;z-index:0"></div>
+      <img src="Softco%20Logo%20PNG%20%282%29%20-%20Copy.svg" alt="Softco Digital" style="position:relative;z-index:1;width:clamp(300px,42vw,520px);max-width:calc(100vw - 4rem);display:block;filter:brightness(1.45) drop-shadow(0 0 28px rgba(70,109,181,1)) drop-shadow(0 0 65px rgba(70,109,181,0.6)) contrast(1.1) saturate(1.2)">
+    </div>
+    <p style="font-size:1.1rem;font-weight:300;color:var(--blue2);margin-bottom:0.6rem;letter-spacing:-0.5px;font-style:italic">
+      "Shaping Digital Success with Passion and Strategy"
+    </p>
+    <p class="hero-sub" style="margin-bottom:1.5rem;font-size:0.95rem;line-height:1.7">
+      We turn your ideas into Digital Masterpieces.<br>
+      Website Development · Digital Marketing · SEO · Branding · E-Commerce
+    </p>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap">
+      <button class="btn-primary" onclick="document.querySelector('#slide-1').scrollIntoView({behavior:'smooth'})">
+        Explore Profile ↓
+      </button>
+      <a href="https://softcodigitalinc.com" class="btn-ghost" target="_blank">Visit Website ↗</a>
+    </div>
+  </div>
+
+  <!-- Floating stats card -->
+  <div class="hero-visual" style="width:36%;right:3rem">
+    <div style="padding:0.5rem">
+      <div style="width:280px;background:linear-gradient(135deg,rgba(14,165,233,0.08),rgba(139,92,246,0.08));border:1px solid rgba(14,165,233,0.2);border-radius:24px;padding:1.5rem;backdrop-filter:blur(20px);box-shadow:var(--glow-purple)">
+        <div style="display:flex;justify-content:space-between;margin-bottom:1rem">
+          <div>
+            <div style="font-size:0.68rem;color:var(--muted);margin-bottom:4px">Completed Projects</div>
+            <div style="font-size:2.2rem;font-weight:900;background:linear-gradient(135deg,var(--blue),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent">38,000+</div>
+          </div>
+          <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;align-items:center;justify-content:center;box-shadow:var(--glow-blue);font-size:1.3rem">🚀</div>
+        </div>
+        <div style="margin-bottom:0.85rem">
+          <div style="font-size:0.73rem;color:var(--muted);margin-bottom:6px">Client Satisfaction</div>
+          <div class="progress-bar"><div class="progress-fill" style="width:98%"></div></div>
+          <div style="font-size:0.8rem;color:var(--blue2);margin-top:4px;font-weight:700">98% Positive Rating</div>
+        </div>
+        <div style="margin-bottom:1rem">
+          <div style="font-size:0.73rem;color:var(--muted);margin-bottom:6px">Happy Clients</div>
+          <div class="progress-bar"><div class="progress-fill" style="width:95%;background:linear-gradient(90deg,var(--purple),var(--pink))"></div></div>
+          <div style="font-size:0.8rem;color:var(--purple2);margin-top:4px;font-weight:700">2,000+ Clients Served</div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;background:rgba(14,165,233,0.1);border:1px solid rgba(14,165,233,0.25);color:var(--blue2)">SEO</span>
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.25);color:var(--purple2)">PPC</span>
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;background:rgba(236,72,153,0.1);border:1px solid rgba(236,72,153,0.25);color:#f9a8d4">Web Dev</span>
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.25);color:#6ee7b7">SMM</span>
+        </div>
+      </div>
+      <div style="position:relative;margin-top:-14px;display:flex;justify-content:center">
+        <div style="background:linear-gradient(135deg,rgba(14,165,233,0.15),rgba(139,92,246,0.15));border:1px solid rgba(14,165,233,0.3);border-radius:50px;padding:0.45rem 1.1rem;white-space:nowrap;backdrop-filter:blur(20px);font-size:0.78rem;color:var(--blue2);font-weight:600;box-shadow:var(--glow-blue)">
+          ✦ 4 Office Locations Worldwide
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-hint"><div class="scroll-arrow"></div>Scroll</div>
+  <div class="slide-counter"><span>01</span> / 11</div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- SLIDE 2 · ABOUT US -->
+<!-- ═══════════════════════════════════════ -->
+<section class="slide" id="slide-1" style="background:linear-gradient(160deg,#050f2e 0%,#020818 60%,#0a0820 100%)">
+  <div class="orb" style="width:400px;height:400px;background:radial-gradient(circle,rgba(139,92,246,0.15),transparent 70%);top:50%;right:5%;transform:translateY(-50%)"></div>
+  <div class="grid-bg"></div>
+
+  <div style="position:relative;z-index:1;width:100%">
+    <div class="slide-label">About Softco Digital</div>
+    <div class="grid-2" style="gap:4.5rem;align-items:center">
+      <div>
+        <h2 class="section-title">Crafting Digital<br>Masterpieces Since 2016</h2>
+        <div class="glow-divider"></div>
+        <p style="color:#cbd5e1;line-height:1.9;margin-bottom:1.25rem;font-size:0.95rem">
+          If you're not effectively online, you're missing out on the real game. At Softco Digital, we craft digital marketing strategies that <strong style="color:#fff">speak to your audience</strong>, build your brand, and grow your business.
+        </p>
+        <p style="color:#94a3b8;line-height:1.9;margin-bottom:1.75rem;font-size:0.9rem">
+          We are results-focused, delivering customized strategies — never cookie-cutter solutions. Every campaign, every line of code, every design decision is made with one goal: your measurable growth.
+        </p>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.85rem;margin-bottom:1.5rem">
+          <div class="glass-card" style="padding:1.25rem">
+            <div style="font-size:0.68rem;color:var(--muted);margin-bottom:4px;letter-spacing:2px;text-transform:uppercase">Mission</div>
+            <div style="font-size:0.85rem;color:#e2e8f0;line-height:1.7">Deliver result-driven digital solutions that turn ideas into measurable growth.</div>
+          </div>
+          <div class="glass-card" style="padding:1.25rem">
+            <div style="font-size:0.68rem;color:var(--muted);margin-bottom:4px;letter-spacing:2px;text-transform:uppercase">Vision</div>
+            <div style="font-size:0.85rem;color:#e2e8f0;line-height:1.7">To be the most trusted global digital agency for ambitious brands.</div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:0.6rem;flex-wrap:wrap">
+          <span class="loc-pill">📍 New Jersey, USA</span>
+          <span class="loc-pill">📍 4 Global Locations</span>
+          <span class="loc-pill">🌐 International Clients</span>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;align-items:center;gap:2rem">
+        <div class="orbit-container">
+          <div class="orbit-center">
+            <img src="softco.jpg" alt="Softco">
+          </div>
+          <div class="orbit-ring"><div class="orbit-dot"></div></div>
+          <div class="orbit-ring"><div class="orbit-dot"></div></div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;width:100%">
+          <div class="stat-block" style="background:var(--glass);border:1px solid var(--glass-border);border-radius:16px;padding:1.1rem">
+            <span class="stat-number" style="font-size:2rem">11+</span>
+            <span class="stat-label">Years</span>
+          </div>
+          <div class="stat-block" style="background:var(--glass);border:1px solid var(--glass-border);border-radius:16px;padding:1.1rem">
+            <span class="stat-number" style="font-size:2rem">2K+</span>
+            <span class="stat-label">Clients</span>
+          </div>
+          <div class="stat-block" style="background:var(--glass);border:1px solid var(--glass-border);border-radius:16px;padding:1.1rem">
+            <span class="stat-number" style="font-size:2rem">98%</span>
+            <span class="stat-label">Rating</span>
+          </div>
+        </div>
+        <div style="display:flex;gap:0.65rem;flex-wrap:wrap;justify-content:center">
+          <span style="padding:0.35rem 0.9rem;border-radius:50px;font-size:0.76rem;background:rgba(14,165,233,0.1);border:1px solid rgba(14,165,233,0.25);color:var(--blue2)">Passion-Driven</span>
+          <span style="padding:0.35rem 0.9rem;border-radius:50px;font-size:0.76rem;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.25);color:var(--purple2)">Result-Focused</span>
+          <span style="padding:0.35rem 0.9rem;border-radius:50px;font-size:0.76rem;background:rgba(236,72,153,0.1);border:1px solid rgba(236,72,153,0.25);color:#f9a8d4">Strategy-Led</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-counter"><span>02</span> / 11</div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- SLIDE 3 · KEY NUMBERS -->
+<!-- ═══════════════════════════════════════ -->
+<section class="slide" id="slide-2" style="background:#020818;min-height:auto;padding:5rem 4rem">
+  <div class="orb" style="width:600px;height:600px;background:radial-gradient(circle,rgba(14,165,233,0.07),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+  <div class="grid-bg"></div>
+
+  <div style="position:relative;z-index:1;width:100%;text-align:center;margin-bottom:3.5rem">
+    <div class="slide-label" style="justify-content:center">By The Numbers</div>
+    <h2 class="section-title">Results That<br>Speak for Themselves</h2>
+    <div class="glow-divider" style="margin:1rem auto 0"></div>
+  </div>
+
+  <div style="position:relative;z-index:1;display:grid;grid-template-columns:repeat(5,1fr);gap:1.25rem;margin-bottom:3rem">
+    <div style="text-align:center;padding:2rem 1rem;border-radius:20px;background:linear-gradient(135deg,rgba(14,165,233,0.08),rgba(14,165,233,0.04));border:1px solid rgba(14,165,233,0.2)">
+      <div style="font-size:3rem;font-weight:900;background:linear-gradient(135deg,var(--blue),var(--blue2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1">38K+</div>
+      <div style="font-size:0.75rem;color:var(--muted);margin-top:0.5rem;text-transform:uppercase;letter-spacing:2px">Projects</div>
+    </div>
+    <div style="text-align:center;padding:2rem 1rem;border-radius:20px;background:linear-gradient(135deg,rgba(139,92,246,0.08),rgba(139,92,246,0.04));border:1px solid rgba(139,92,246,0.2)">
+      <div style="font-size:3rem;font-weight:900;background:linear-gradient(135deg,var(--purple),var(--purple2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1">2,000+</div>
+      <div style="font-size:0.75rem;color:var(--muted);margin-top:0.5rem;text-transform:uppercase;letter-spacing:2px">Clients</div>
+    </div>
+    <div style="text-align:center;padding:2rem 1rem;border-radius:20px;background:linear-gradient(135deg,rgba(16,185,129,0.08),rgba(16,185,129,0.04));border:1px solid rgba(16,185,129,0.2)">
+      <div style="font-size:3rem;font-weight:900;background:linear-gradient(135deg,#10b981,#6ee7b7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1">98%</div>
+      <div style="font-size:0.75rem;color:var(--muted);margin-top:0.5rem;text-transform:uppercase;letter-spacing:2px">Positive Rating</div>
+    </div>
+    <div style="text-align:center;padding:2rem 1rem;border-radius:20px;background:linear-gradient(135deg,rgba(245,158,11,0.08),rgba(245,158,11,0.04));border:1px solid rgba(245,158,11,0.2)">
+      <div style="font-size:3rem;font-weight:900;background:linear-gradient(135deg,#f59e0b,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1">11+</div>
+      <div style="font-size:0.75rem;color:var(--muted);margin-top:0.5rem;text-transform:uppercase;letter-spacing:2px">Years Exp.</div>
+    </div>
+    <div style="text-align:center;padding:2rem 1rem;border-radius:20px;background:linear-gradient(135deg,rgba(236,72,153,0.08),rgba(236,72,153,0.04));border:1px solid rgba(236,72,153,0.2)">
+      <div style="font-size:3rem;font-weight:900;background:linear-gradient(135deg,var(--pink),#f9a8d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1">4</div>
+      <div style="font-size:0.75rem;color:var(--muted);margin-top:0.5rem;text-transform:uppercase;letter-spacing:2px">Locations</div>
+    </div>
+  </div>
+
+  <!-- Expertise bars -->
+  <div style="position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;max-width:900px;margin:0 auto">
+    <div>
+      <div class="expertise-item">
+        <div class="expertise-label"><span>Programming & Development</span><span>90%</span></div>
+        <div class="progress-bar"><div class="progress-fill" style="width:90%"></div></div>
+      </div>
+      <div class="expertise-item">
+        <div class="expertise-label"><span>Backend Development</span><span>95%</span></div>
+        <div class="progress-bar"><div class="progress-fill" style="width:95%"></div></div>
+      </div>
+    </div>
+    <div>
+      <div class="expertise-item">
+        <div class="expertise-label"><span>UI/UX Design</span><span>96%</span></div>
+        <div class="progress-bar"><div class="progress-fill" style="width:96%"></div></div>
+      </div>
+      <div class="expertise-item">
+        <div class="expertise-label"><span>Product Design</span><span>92%</span></div>
+        <div class="progress-bar"><div class="progress-fill" style="width:92%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-counter" style="position:relative;text-align:right;margin-top:2rem"><span>03</span> / 11</div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- SLIDE 4 · SERVICES -->
+<!-- ═══════════════════════════════════════ -->
+<section class="slide" id="slide-3" style="background:linear-gradient(135deg,#020818,#05122a);min-height:auto;padding:5rem 4rem">
+  <div class="orb" style="width:500px;height:500px;background:radial-gradient(circle,rgba(14,165,233,0.08),transparent 70%);top:0;left:50%;transform:translateX(-50%)"></div>
+  <div class="grid-bg"></div>
+
+  <div style="position:relative;z-index:1;width:100%;text-align:center;margin-bottom:3rem">
+    <div class="slide-label" style="justify-content:center">Our Services</div>
+    <h2 class="section-title">Everything You Need<br>to Dominate Online</h2>
+    <div class="glow-divider" style="margin:1rem auto 0"></div>
+  </div>
+
+  <div style="position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem">
+    <div class="glow-card">
+      <div class="card-icon">🔍</div>
+      <h3>SEO</h3>
+      <p>Optimizing your website for Google's first page — technical, on-page, and off-page strategies.</p>
+    </div>
+    <div class="glow-card">
+      <div class="card-icon" style="background:linear-gradient(135deg,var(--purple),var(--pink))">📣</div>
+      <h3>Social Media Marketing</h3>
+      <p>Converting followers into customers across Instagram, Facebook, LinkedIn, and TikTok.</p>
+    </div>
+    <div class="glow-card">
+      <div class="card-icon" style="background:linear-gradient(135deg,#f59e0b,#d97706)">💰</div>
+      <h3>Pay-Per-Click (PPC)</h3>
+      <p>Targeted Google & Meta ads reaching audiences actively searching for your products.</p>
+    </div>
+    <div class="glow-card">
+      <div class="card-icon" style="background:linear-gradient(135deg,#06b6d4,var(--blue))">🌐</div>
+      <h3>Web Design & Dev</h3>
+      <p>Responsive, conversion-focused websites built for performance and user experience.</p>
+    </div>
+    <div class="glow-card">
+      <div class="card-icon" style="background:linear-gradient(135deg,#10b981,#059669)">🛒</div>
+      <h3>E-Commerce Solutions</h3>
+      <p>End-to-end e-commerce platforms (Shopify, WooCommerce) designed to maximize revenue.</p>
+    </div>
+    <div class="glow-card">
+      <div class="card-icon" style="background:linear-gradient(135deg,var(--pink),#f43f5e)">✦</div>
+      <h3>Branding</h3>
+      <p>Brand development and positioning that creates a lasting, distinctive market identity.</p>
+    </div>
+    <div class="glow-card">
+      <div class="card-icon" style="background:linear-gradient(135deg,var(--purple),#7c3aed)">🎨</div>
+      <h3>UI/UX Design</h3>
+      <p>Intuitive, beautiful interfaces that delight users and convert visitors into customers.</p>
+    </div>
+    <div class="glow-card">
+      <div class="card-icon" style="background:linear-gradient(135deg,#06b6d4,#0891b2)">📝</div>
+      <h3>Content Marketing</h3>
+      <p>Engaging blogs, videos, and social content that builds authority and drives organic traffic.</p>
+    </div>
+    <div class="glow-card">
+      <div class="card-icon" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">📊</div>
+      <h3>SEM</h3>
+      <p>Combining organic SEO and paid search for maximum search engine visibility and reach.</p>
+    </div>
+    <div class="glow-card">
+      <div class="card-icon" style="background:linear-gradient(135deg,#10b981,var(--blue))">⭐</div>
+      <h3>Online Reputation</h3>
+      <p>Monitoring and improving your brand reputation — reviews, mentions, and online presence.</p>
+    </div>
+    <div class="glow-card">
+      <div class="card-icon" style="background:linear-gradient(135deg,var(--blue),var(--purple))">💡</div>
+      <h3>Consultation</h3>
+      <p>Expert digital strategy consultation to align your business goals with the right online approach.</p>
+    </div>
+    <div class="glow-card" style="background:linear-gradient(135deg,rgba(14,165,233,0.12),rgba(139,92,246,0.12));border-color:rgba(14,165,233,0.35);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:0.75rem">
+      <div style="font-size:2rem">🚀</div>
+      <div style="font-size:0.85rem;font-weight:700;color:#fff">Full-Service Agency</div>
+      <div style="font-size:0.78rem;color:var(--muted)">One partner for all your digital needs</div>
+      <a href="https://softcodigitalinc.com" target="_blank" style="font-size:0.75rem;color:var(--blue2);font-weight:600;text-decoration:none">softcodigitalinc.com ↗</a>
+    </div>
+  </div>
+  <div class="slide-counter" style="position:relative;text-align:right;margin-top:2rem"><span>04</span> / 11</div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- SLIDE 5 · DIGITAL MARKETING DEEP DIVE -->
+<!-- ═══════════════════════════════════════ -->
+<section class="slide" id="slide-4" style="background:linear-gradient(135deg,#020818,#050f2e,#020818)">
+  <div class="orb" style="width:500px;height:500px;background:radial-gradient(circle,rgba(14,165,233,0.1),transparent 70%);top:0;right:0"></div>
+  <div class="grid-bg"></div>
+
+  <div style="position:relative;z-index:1;width:100%;text-align:center;margin-bottom:3rem">
+    <div class="slide-label" style="justify-content:center">Digital Marketing</div>
+    <h2 class="section-title">Data-Driven Marketing<br>That Delivers ROI</h2>
+    <div class="glow-divider" style="margin:1rem auto 0"></div>
+  </div>
+
+  <div style="position:relative;z-index:1;display:grid;grid-template-columns:2fr 1fr;gap:2rem;align-items:start">
+    <!-- Chart visual -->
+    <div class="glass-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem">
+        <div>
+          <div style="font-size:0.68rem;color:var(--muted);margin-bottom:3px">Campaign Performance Overview</div>
+          <div style="font-size:1.6rem;font-weight:800;background:linear-gradient(135deg,var(--blue),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent">+247% Average ROI</div>
+        </div>
+        <span style="padding:4px 12px;border-radius:50px;font-size:0.72rem;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);color:#6ee7b7;font-weight:700">↑ Consistent Growth</span>
+      </div>
+      <svg viewBox="0 0 400 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100px">
+        <defs>
+          <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#0ea5e9" stop-opacity="0.9"/>
+            <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0.4"/>
+          </linearGradient>
+        </defs>
+        <rect x="10" y="60" width="30" height="35" rx="4" fill="url(#barGrad)"/>
+        <rect x="55" y="45" width="30" height="50" rx="4" fill="url(#barGrad)"/>
+        <rect x="100" y="35" width="30" height="60" rx="4" fill="url(#barGrad)"/>
+        <rect x="145" y="25" width="30" height="70" rx="4" fill="url(#barGrad)"/>
+        <rect x="190" y="15" width="30" height="80" rx="4" fill="url(#barGrad)"/>
+        <rect x="235" y="10" width="30" height="85" rx="4" fill="url(#barGrad)"/>
+        <rect x="280" y="5" width="30" height="90" rx="4" fill="url(#barGrad)"/>
+        <rect x="325" y="2" width="30" height="93" rx="4" fill="url(#barGrad)"/>
+        <text x="25" y="10" fill="#94a3b8" font-size="8" text-anchor="middle">Q1</text>
+        <text x="70" y="10" fill="#94a3b8" font-size="8" text-anchor="middle">Q2</text>
+        <text x="115" y="10" fill="#94a3b8" font-size="8" text-anchor="middle">Q3</text>
+        <text x="160" y="10" fill="#94a3b8" font-size="8" text-anchor="middle">Q4</text>
+        <text x="205" y="10" fill="#0ea5e9" font-size="8" text-anchor="middle">Q5</text>
+        <text x="250" y="10" fill="#0ea5e9" font-size="8" text-anchor="middle">Q6</text>
+        <text x="295" y="10" fill="#8b5cf6" font-size="8" text-anchor="middle">Q7</text>
+        <text x="340" y="10" fill="#8b5cf6" font-size="8" text-anchor="middle">Q8</text>
+      </svg>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0.75rem;margin-top:1rem">
+        <div style="text-align:center;padding:0.75rem;border-radius:10px;background:rgba(14,165,233,0.08);border:1px solid rgba(14,165,233,0.15)">
+          <div style="font-size:1rem;font-weight:800;color:var(--blue2)">35%+</div>
+          <div style="font-size:0.65rem;color:var(--muted)">Traffic Boost</div>
+        </div>
+        <div style="text-align:center;padding:0.75rem;border-radius:10px;background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.15)">
+          <div style="font-size:1rem;font-weight:800;color:var(--purple2)">#1 Rank</div>
+          <div style="font-size:0.65rem;color:var(--muted)">Google Results</div>
+        </div>
+        <div style="text-align:center;padding:0.75rem;border-radius:10px;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.15)">
+          <div style="font-size:1rem;font-weight:800;color:#6ee7b7">4.2x</div>
+          <div style="font-size:0.65rem;color:var(--muted)">Avg ROAS</div>
+        </div>
+        <div style="text-align:center;padding:0.75rem;border-radius:10px;background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.15)">
+          <div style="font-size:1rem;font-weight:800;color:#fbbf24">98%</div>
+          <div style="font-size:0.65rem;color:var(--muted)">Positive Rating</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Channel breakdown -->
+    <div style="display:flex;flex-direction:column;gap:0.75rem">
+      <div class="glass-card" style="padding:1rem">
+        <div style="font-size:0.85rem;font-weight:700;color:#fff;margin-bottom:0.25rem">🔍 SEO & Content</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:90%"></div></div>
+        <div style="font-size:0.72rem;color:var(--muted);margin-top:4px">First page rankings achieved</div>
+      </div>
+      <div class="glass-card" style="padding:1rem">
+        <div style="font-size:0.85rem;font-weight:700;color:#fff;margin-bottom:0.25rem">📢 Google Ads (PPC)</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:92%"></div></div>
+        <div style="font-size:0.72rem;color:var(--muted);margin-top:4px">High-quality score campaigns</div>
+      </div>
+      <div class="glass-card" style="padding:1rem">
+        <div style="font-size:0.85rem;font-weight:700;color:#fff;margin-bottom:0.25rem">📘 Social Media (SMM)</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:88%"></div></div>
+        <div style="font-size:0.72rem;color:var(--muted);margin-top:4px">Followers converted to buyers</div>
+      </div>
+      <div class="glass-card" style="padding:1rem">
+        <div style="font-size:0.85rem;font-weight:700;color:#fff;margin-bottom:0.25rem">⭐ Online Reputation</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:96%"></div></div>
+        <div style="font-size:0.72rem;color:var(--muted);margin-top:4px">Brand monitoring & recovery</div>
+      </div>
+      <div class="glass-card" style="padding:1rem">
+        <div style="font-size:0.85rem;font-weight:700;color:#fff;margin-bottom:0.25rem">📝 Content Marketing</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:85%"></div></div>
+        <div style="font-size:0.72rem;color:var(--muted);margin-top:4px">Authority-building content</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-counter" style="position:relative;text-align:right;margin-top:2rem"><span>05</span> / 11</div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- SLIDE 6 · WHY CHOOSE US -->
+<!-- ═══════════════════════════════════════ -->
+<section class="slide" id="slide-5" style="background:linear-gradient(160deg,#0a0820,#020818)">
+  <div class="orb" style="width:500px;height:500px;background:radial-gradient(circle,rgba(139,92,246,0.12),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+  <div class="grid-bg"></div>
+
+  <div style="position:relative;z-index:1;width:100%;text-align:center;margin-bottom:3rem">
+    <div class="slide-label" style="justify-content:center">Why Choose Us</div>
+    <h2 class="section-title">The Softco Digital<br>Difference</h2>
+    <div class="glow-divider" style="margin:1rem auto 0"></div>
+  </div>
+
+  <div style="position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem">
+    <div class="glass-card" style="text-align:center;padding:2.25rem 1.5rem">
+      <div style="font-size:2.5rem;margin-bottom:1rem">🏆</div>
+      <h3 style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:0.5rem">11+ Years Experience</h3>
+      <p style="font-size:0.82rem;color:var(--muted);line-height:1.7">Over a decade of navigating every evolution in digital — we've seen it all and stayed ahead.</p>
+    </div>
+    <div class="glass-card" style="text-align:center;padding:2.25rem 1.5rem;border-color:rgba(14,165,233,0.3);box-shadow:var(--glow-blue)">
+      <div style="font-size:2.5rem;margin-bottom:1rem">🎯</div>
+      <h3 style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:0.5rem">Customized Strategies</h3>
+      <p style="font-size:0.82rem;color:var(--muted);line-height:1.7">No cookie-cutter solutions. Every strategy is crafted specifically for your business and audience.</p>
+      <span style="display:inline-block;margin-top:0.75rem;padding:3px 12px;border-radius:50px;font-size:0.7rem;font-weight:700;background:rgba(14,165,233,0.15);border:1px solid rgba(14,165,233,0.3);color:var(--blue2)">Our Approach</span>
+    </div>
+    <div class="glass-card" style="text-align:center;padding:2.25rem 1.5rem">
+      <div style="font-size:2.5rem;margin-bottom:1rem">📈</div>
+      <h3 style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:0.5rem">Results-Focused</h3>
+      <p style="font-size:0.82rem;color:var(--muted);line-height:1.7">We measure success by your growth — traffic, leads, conversions, and revenue are our KPIs.</p>
+    </div>
+    <div class="glass-card" style="text-align:center;padding:2.25rem 1.5rem">
+      <div style="font-size:2.5rem;margin-bottom:1rem">🌍</div>
+      <h3 style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:0.5rem">Global Reach</h3>
+      <p style="font-size:0.82rem;color:var(--muted);line-height:1.7">4 office locations and 2,000+ clients across multiple countries — we understand global markets.</p>
+    </div>
+    <div class="glass-card" style="text-align:center;padding:2.25rem 1.5rem">
+      <div style="font-size:2.5rem;margin-bottom:1rem">🛠️</div>
+      <h3 style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:0.5rem">Full-Service Capability</h3>
+      <p style="font-size:0.82rem;color:var(--muted);line-height:1.7">From branding to web dev to marketing — one agency handles everything for seamless execution.</p>
+    </div>
+    <div class="glass-card" style="text-align:center;padding:2.25rem 1.5rem">
+      <div style="font-size:2.5rem;margin-bottom:1rem">❤️</div>
+      <h3 style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:0.5rem">Passion-Driven Team</h3>
+      <p style="font-size:0.82rem;color:var(--muted);line-height:1.7">We genuinely care about your success. 98% satisfaction rating built on trust and real results.</p>
+    </div>
+  </div>
+  <div class="slide-counter" style="position:relative;text-align:right;margin-top:2rem"><span>06</span> / 11</div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- SLIDE 7 · CLIENT WORK & PORTFOLIO -->
+<!-- ═══════════════════════════════════════ -->
+<section class="slide" id="slide-6" style="background:#020818;min-height:auto;padding:5rem 4rem">
+  <div class="orb" style="width:500px;height:500px;background:radial-gradient(circle,rgba(139,92,246,0.1),transparent 70%);top:0;right:0"></div>
+  <div class="grid-bg"></div>
+
+  <div style="position:relative;z-index:1;width:100%;text-align:center;margin-bottom:3rem">
+    <div class="slide-label" style="justify-content:center">Client Work & Portfolio</div>
+    <h2 class="section-title">Real Clients.<br>Real Results.</h2>
+    <div class="glow-divider" style="margin:1rem auto 0"></div>
+    <p style="color:var(--muted);font-size:0.9rem;margin-top:0.75rem">Serving clients across the USA and worldwide — delivering measurable impact every time</p>
+  </div>
+
+  <div style="position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:2rem">
+    <!-- Client 1 -->
+    <div class="portfolio-card">
+      <div class="portfolio-thumb" style="background:linear-gradient(135deg,rgba(14,165,233,0.15),rgba(139,92,246,0.15))">
+        <div style="text-align:center">
+          <div style="font-size:2.5rem">📈</div>
+          <div style="font-size:0.65rem;color:var(--muted);margin-top:4px;background:rgba(0,0,0,0.4);padding:2px 8px;border-radius:4px">SEO Campaign</div>
+        </div>
+      </div>
+      <div class="portfolio-info">
+        <span class="portfolio-tag">SEO</span>
+        <div class="portfolio-name">Sarah Williams</div>
+        <div class="portfolio-client">📍 Florida, USA</div>
+        <div class="portfolio-desc">Comprehensive SEO strategy and content optimization for a service-based business</div>
+        <span class="metric-pill">📈 +35% Traffic Boost</span>
+      </div>
+    </div>
+    <!-- Client 2 -->
+    <div class="portfolio-card">
+      <div class="portfolio-thumb" style="background:linear-gradient(135deg,rgba(139,92,246,0.15),rgba(236,72,153,0.1))">
+        <div style="text-align:center">
+          <div style="font-size:2.5rem">🗺️</div>
+          <div style="font-size:0.65rem;color:var(--muted);margin-top:4px;background:rgba(0,0,0,0.4);padding:2px 8px;border-radius:4px">Local SEO</div>
+        </div>
+      </div>
+      <div class="portfolio-info">
+        <span class="portfolio-tag" style="background:rgba(139,92,246,0.15);border-color:rgba(139,92,246,0.3);color:var(--purple2)">Local SEO</span>
+        <div class="portfolio-name">Andrew Turner</div>
+        <div class="portfolio-client">📍 Virginia, USA</div>
+        <div class="portfolio-desc">Local SEO and Google Business Profile optimization for a local services company</div>
+        <span class="metric-pill" style="background:linear-gradient(135deg,var(--purple),var(--pink))">🔍 #1 Search Result</span>
+      </div>
+    </div>
+    <!-- Client 3 -->
+    <div class="portfolio-card">
+      <div class="portfolio-thumb" style="background:linear-gradient(135deg,rgba(16,185,129,0.1),rgba(14,165,233,0.15))">
+        <div style="text-align:center">
+          <div style="font-size:2.5rem">🚀</div>
+          <div style="font-size:0.65rem;color:var(--muted);margin-top:4px;background:rgba(0,0,0,0.4);padding:2px 8px;border-radius:4px">Digital Marketing</div>
+        </div>
+      </div>
+      <div class="portfolio-info">
+        <span class="portfolio-tag" style="background:rgba(16,185,129,0.15);border-color:rgba(16,185,129,0.3);color:#6ee7b7">Growth</span>
+        <div class="portfolio-name">Christopher Hall</div>
+        <div class="portfolio-client">📍 New Jersey, USA</div>
+        <div class="portfolio-desc">Full digital marketing overhaul — from stagnant to thriving in just a few months</div>
+        <span class="metric-pill" style="background:linear-gradient(135deg,#059669,var(--blue))">📊 Stagnant → Thriving</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem">
+    <!-- Client 4 -->
+    <div class="portfolio-card">
+      <div class="portfolio-thumb" style="background:linear-gradient(135deg,rgba(245,158,11,0.1),rgba(14,165,233,0.1))">
+        <div style="text-align:center">
+          <div style="font-size:2.5rem">📱</div>
+          <div style="font-size:0.65rem;color:var(--muted);margin-top:4px;background:rgba(0,0,0,0.4);padding:2px 8px;border-radius:4px">Social Media</div>
+        </div>
+      </div>
+      <div class="portfolio-info">
+        <span class="portfolio-tag" style="background:rgba(245,158,11,0.15);border-color:rgba(245,158,11,0.3);color:#fbbf24">SMM</span>
+        <div class="portfolio-name">David Thompson</div>
+        <div class="portfolio-client">📍 New York, USA</div>
+        <div class="portfolio-desc">Tailored social media strategy with audience-specific content and engagement campaigns</div>
+        <span class="metric-pill" style="background:linear-gradient(135deg,#d97706,var(--purple))">💥 Engagement Skyrocketed</span>
+      </div>
+    </div>
+    <!-- Client 5 -->
+    <div class="portfolio-card" style="border-color:rgba(14,165,233,0.25)">
+      <div class="portfolio-thumb" style="background:linear-gradient(135deg,rgba(14,165,233,0.12),rgba(139,92,246,0.12))">
+        <div style="text-align:center">
+          <div style="font-size:2.5rem">⭐</div>
+          <div style="font-size:0.65rem;color:var(--muted);margin-top:4px;background:rgba(0,0,0,0.4);padding:2px 8px;border-radius:4px">Long-term Client</div>
+        </div>
+      </div>
+      <div class="portfolio-info">
+        <span class="portfolio-tag">Ongoing</span>
+        <div class="portfolio-name">James Anderson</div>
+        <div class="portfolio-client">📍 California, USA · Since 2019</div>
+        <div class="portfolio-desc">Multi-year digital partnership covering SEO, PPC, content, and social media management</div>
+        <span class="metric-pill">🤝 6+ Year Partnership</span>
+      </div>
+    </div>
+    <!-- Client 6 -->
+    <div class="portfolio-card">
+      <div class="portfolio-thumb" style="background:linear-gradient(135deg,rgba(139,92,246,0.12),rgba(16,185,129,0.1))">
+        <div style="text-align:center">
+          <div style="font-size:2.5rem">🌐</div>
+          <div style="font-size:0.65rem;color:var(--muted);margin-top:4px;background:rgba(0,0,0,0.4);padding:2px 8px;border-radius:4px">SEO Optimization</div>
+        </div>
+      </div>
+      <div class="portfolio-info">
+        <span class="portfolio-tag" style="background:rgba(139,92,246,0.15);border-color:rgba(139,92,246,0.3);color:var(--purple2)">SEO</span>
+        <div class="portfolio-name">Mark Sullivan</div>
+        <div class="portfolio-client">📍 Washington, USA</div>
+        <div class="portfolio-desc">Advanced SEO optimization beyond expectations — organic traffic soared with sustainable growth</div>
+        <span class="metric-pill" style="background:linear-gradient(135deg,var(--purple),var(--blue))">🚀 Traffic Soared</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Portfolio categories row -->
+  <div style="position:relative;z-index:1;margin-top:2rem;padding:1.25rem 1.75rem;border-radius:16px;background:var(--glass);border:1px solid var(--glass-border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem">
+    <div style="font-size:0.82rem;font-weight:700;color:#fff">Portfolio Categories:</div>
+    <div style="display:flex;gap:0.6rem;flex-wrap:wrap">
+      <span style="padding:4px 12px;border-radius:50px;font-size:0.75rem;font-weight:600;background:rgba(14,165,233,0.1);border:1px solid rgba(14,165,233,0.25);color:var(--blue2)">Content Creation</span>
+      <span style="padding:4px 12px;border-radius:50px;font-size:0.75rem;font-weight:600;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.25);color:var(--purple2)">Social Media</span>
+      <span style="padding:4px 12px;border-radius:50px;font-size:0.75rem;font-weight:600;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.25);color:#6ee7b7">SEO</span>
+      <span style="padding:4px 12px;border-radius:50px;font-size:0.75rem;font-weight:600;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.25);color:#fbbf24">PPC Advertising</span>
+      <span style="padding:4px 12px;border-radius:50px;font-size:0.75rem;font-weight:600;background:rgba(236,72,153,0.1);border:1px solid rgba(236,72,153,0.25);color:#f9a8d4">Email Marketing</span>
+      <span style="padding:4px 12px;border-radius:50px;font-size:0.75rem;font-weight:600;background:rgba(14,165,233,0.1);border:1px solid rgba(14,165,233,0.25);color:var(--blue2)">Web Design</span>
+    </div>
+  </div>
+
+  <div class="slide-counter" style="position:relative;text-align:right;margin-top:2rem"><span>07</span> / 11</div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- SLIDE 8 · WEB & E-COMMERCE -->
+<!-- ═══════════════════════════════════════ -->
+<section class="slide" id="slide-7" style="background:linear-gradient(135deg,#020818,#05122a)">
+  <div class="orb" style="width:400px;height:400px;background:radial-gradient(circle,rgba(14,165,233,0.12),transparent 70%);top:10%;right:10%"></div>
+  <div class="grid-bg"></div>
+
+  <div style="position:relative;z-index:1;width:100%">
+    <div class="slide-label">Website & E-Commerce</div>
+    <div class="grid-2" style="gap:4rem;align-items:center">
+      <div>
+        <h2 class="section-title">Websites & Stores<br>Built to Convert</h2>
+        <div class="glow-divider"></div>
+        <p style="color:#cbd5e1;font-size:0.93rem;line-height:1.9;margin-bottom:2rem">
+          We build responsive, conversion-focused websites and complete e-commerce platforms that don't just look great — they drive real revenue and business growth.
+        </p>
+        <div style="display:flex;flex-direction:column;gap:0.75rem">
+          <div class="feature-row">
+            <div class="feature-icon fi-blue">🛒</div>
+            <div><h4>E-Commerce Solutions</h4><p>End-to-end Shopify & WooCommerce stores designed to maximize every visitor's value.</p></div>
+          </div>
+          <div class="feature-row">
+            <div class="feature-icon fi-purple">🎨</div>
+            <div><h4>UI/UX Design</h4><p>96% expertise score — intuitive interfaces that delight users and eliminate friction.</p></div>
+          </div>
+          <div class="feature-row">
+            <div class="feature-icon fi-pink">⚡</div>
+            <div><h4>Performance First</h4><p>Responsive design with 90+ PageSpeed targets — fast on every device, everywhere.</p></div>
+          </div>
+          <div class="feature-row">
+            <div class="feature-icon fi-blue">✦</div>
+            <div><h4>Branding & Identity</h4><p>From logo to full brand system — we create identities that make lasting impressions.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mock browser -->
+      <div style="animation:float 6s ease-in-out infinite">
+        <div class="mock-browser">
+          <div class="mock-bar">
+            <div class="mock-dot" style="background:#ff5f57"></div>
+            <div class="mock-dot" style="background:#febc2e"></div>
+            <div class="mock-dot" style="background:#28c840"></div>
+            <div class="mock-url">softcodigitalinc.com</div>
+          </div>
+          <div style="padding:20px;background:#0d1117">
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px">
+              <div style="background:rgba(14,165,233,0.08);border:1px solid rgba(14,165,233,0.15);border-radius:8px;padding:10px;text-align:center">
+                <div style="font-size:1.1rem;font-weight:800;color:var(--blue2)">38K+</div>
+                <div style="font-size:0.65rem;color:var(--muted)">Projects</div>
+              </div>
+              <div style="background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.15);border-radius:8px;padding:10px;text-align:center">
+                <div style="font-size:1.1rem;font-weight:800;color:var(--purple2)">2,000+</div>
+                <div style="font-size:0.65rem;color:var(--muted)">Clients</div>
+              </div>
+              <div style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.15);border-radius:8px;padding:10px;text-align:center">
+                <div style="font-size:1.1rem;font-weight:800;color:#6ee7b7">98%</div>
+                <div style="font-size:0.65rem;color:var(--muted)">Rating</div>
+              </div>
+            </div>
+            <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:10px">
+              <div style="font-size:0.7rem;color:var(--muted);margin-bottom:8px">Services We Build</div>
+              <div style="display:flex;flex-direction:column;gap:5px">
+                <div style="display:flex;justify-content:space-between;font-size:0.7rem"><span style="color:#94a3b8">Shopify / WooCommerce</span><span style="color:#6ee7b7;background:rgba(16,185,129,0.1);padding:1px 6px;border-radius:4px">E-Commerce</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:0.7rem"><span style="color:#94a3b8">Corporate Websites</span><span style="color:var(--blue2);background:rgba(14,165,233,0.1);padding:1px 6px;border-radius:4px">WordPress</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:0.7rem"><span style="color:#94a3b8">Brand Identity Systems</span><span style="color:var(--purple2);background:rgba(139,92,246,0.1);padding:1px 6px;border-radius:4px">Branding</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-counter"><span>08</span> / 11</div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- SLIDE 9 · TESTIMONIALS -->
+<!-- ═══════════════════════════════════════ -->
+<section class="slide" id="slide-8" style="background:linear-gradient(135deg,#020818,#0a0820)">
+  <div class="orb" style="width:400px;height:400px;background:radial-gradient(circle,rgba(236,72,153,0.08),transparent 70%);top:20%;right:5%"></div>
+  <div class="grid-bg"></div>
+
+  <div style="position:relative;z-index:1;width:100%;text-align:center;margin-bottom:3rem">
+    <div class="slide-label" style="justify-content:center">Client Testimonials</div>
+    <h2 class="section-title">Trusted by 2,000+<br>Clients Across the USA</h2>
+    <div class="glow-divider" style="margin:1rem auto 0"></div>
+  </div>
+
+  <div style="position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem">
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Boosted our traffic by 35% — incredible results! Softco Digital's SEO strategy transformed how customers find us online."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">SW</div>
+        <div>
+          <div class="testi-name">Sarah Williams</div>
+          <div class="testi-role">Florida, USA · SEO Client</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card" style="border-color:rgba(14,165,233,0.2);box-shadow:var(--glow-blue)">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Transformed our local SEO. We're now the top search result for our most important keywords. Simply outstanding work."</p>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background:linear-gradient(135deg,var(--purple),var(--pink))">AT</div>
+        <div>
+          <div class="testi-name">Andrew Turner</div>
+          <div class="testi-role">Virginia, USA · Local SEO Client</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"From stagnant to thriving in months. I couldn't believe the turnaround. Softco Digital delivered beyond what I thought was possible."</p>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background:linear-gradient(135deg,#059669,var(--blue))">CH</div>
+        <div>
+          <div class="testi-name">Christopher Hall</div>
+          <div class="testi-role">New Jersey, USA · Digital Marketing</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Our engagement skyrocketed thanks to their tailored social media strategy! Every post, every campaign — perfectly aligned with our brand."</p>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background:linear-gradient(135deg,#f59e0b,var(--purple))">DT</div>
+        <div>
+          <div class="testi-name">David Thompson</div>
+          <div class="testi-role">New York, USA · Social Media Client</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card" style="border-color:rgba(139,92,246,0.2)">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Working with Softco Digital since 2019 and I have never felt lacking in their work. Consistent quality, year after year."</p>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background:linear-gradient(135deg,var(--blue),var(--purple))">JA</div>
+        <div>
+          <div class="testi-name">James Anderson</div>
+          <div class="testi-role">California, USA · Since 2019</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Optimized our SEO beyond expectations. Traffic soared after working with Softco Digital — they truly know what they're doing."</p>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background:linear-gradient(135deg,var(--pink),var(--purple))">MS</div>
+        <div>
+          <div class="testi-name">Mark Sullivan</div>
+          <div class="testi-role">Washington, USA · SEO Client</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-counter" style="position:relative;text-align:right;margin-top:2rem"><span>09</span> / 11</div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- SLIDE 10 · OUR CUSTOMERS -->
+<!-- ═══════════════════════════════════════ -->
+<section class="slide" id="slide-9" style="background:linear-gradient(135deg,#020818,#050f2e,#020818);min-height:auto;padding:5rem 0 4rem">
+  <div class="orb" style="width:500px;height:500px;background:radial-gradient(circle,rgba(14,165,233,0.1),transparent 70%);top:0;right:0"></div>
+  <div class="orb" style="width:400px;height:400px;background:radial-gradient(circle,rgba(139,92,246,0.08),transparent 70%);bottom:0;left:0;animation-delay:2s"></div>
+  <div class="grid-bg"></div>
+
+  <div style="position:relative;z-index:1;width:100%;text-align:center;margin-bottom:3rem">
+    <div class="slide-label" style="justify-content:center">Our Customers</div>
+    <h2 class="section-title">Trusted by Businesses<br>Around the Globe</h2>
+    <div class="glow-divider" style="margin:1rem auto 0"></div>
+    <p style="color:var(--muted);font-size:0.9rem;margin-top:0.75rem">Real businesses. Real websites. Real results.</p>
+  </div>
+
+  <!-- All 13 Clients — uniform card style (info + browser mockup) -->
+  <div style="position:relative;z-index:1;display:flex;flex-direction:column;gap:1.4rem">
+
+    <!-- 1. Edge Republic -->
+    <div style="display:grid;grid-template-columns:1fr 1.45fr;gap:2rem;align-items:center;background:linear-gradient(135deg,rgba(14,165,233,0.07),rgba(139,92,246,0.07));border:1px solid rgba(14,165,233,0.25);border-radius:20px;padding:1.75rem 2rem">
+      <div>
+        <div style="font-size:1.55rem;font-weight:900;color:#fff;margin-bottom:0.3rem;letter-spacing:-0.5px">Edge Republic</div>
+        <div style="font-size:0.8rem;color:var(--blue2);margin-bottom:0.9rem;font-weight:600">🌐 edge.pk</div>
+        <p style="color:#cbd5e1;font-size:0.82rem;line-height:1.75;margin-bottom:1rem">A dynamic business that partnered with Softco Digital for comprehensive digital solutions — delivering a powerful online presence backed by proven strategy.</p>
+        <div style="display:flex;gap:0.45rem;flex-wrap:wrap;margin-bottom:1.1rem">
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;font-weight:600;background:rgba(14,165,233,0.1);border:1px solid rgba(14,165,233,0.3);color:var(--blue2)">Web Development</span>
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;font-weight:600;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);color:var(--purple2)">Digital Marketing</span>
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;font-weight:600;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);color:#6ee7b7">SEO</span>
+        </div>
+        <a href="https://edge.pk/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:0.55rem 1.4rem;border-radius:50px;background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;font-weight:700;font-size:0.82rem;text-decoration:none;box-shadow:var(--glow-blue)">Visit Website ↗</a>
+      </div>
+      <div style="animation:float 6s ease-in-out infinite">
+        <div class="mock-browser" style="box-shadow:0 16px 50px rgba(14,165,233,0.15)">
+          <div class="mock-bar"><div class="mock-dot" style="background:#ff5f57"></div><div class="mock-dot" style="background:#febc2e"></div><div class="mock-dot" style="background:#28c840"></div><div class="mock-url">🔒 edge.pk</div></div>
+          <div style="background:#0d1117;padding:14px">
+            <div style="background:linear-gradient(135deg,rgba(14,165,233,0.12),rgba(139,92,246,0.08));border:1px solid rgba(14,165,233,0.15);border-radius:8px;padding:14px;margin-bottom:10px">
+              <div style="font-size:0.8rem;font-weight:800;color:var(--blue2);margin-bottom:8px">Edge Republic</div>
+              <div style="height:6px;background:rgba(255,255,255,0.06);border-radius:3px;margin-bottom:5px;width:80%"></div>
+              <div style="height:6px;background:rgba(255,255,255,0.06);border-radius:3px;width:60%"></div>
+            </div>
+            <div style="display:flex;gap:6px">
+              <span style="padding:3px 8px;border-radius:4px;font-size:0.6rem;background:rgba(14,165,233,0.12);border:1px solid rgba(14,165,233,0.2);color:var(--blue2);font-weight:600">Digital Marketing</span>
+              <span style="padding:3px 8px;border-radius:4px;font-size:0.6rem;background:rgba(139,92,246,0.12);border:1px solid rgba(139,92,246,0.2);color:var(--purple2);font-weight:600">SEO</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Print It PK -->
+    <div style="display:grid;grid-template-columns:1fr 1.45fr;gap:2rem;align-items:center;background:linear-gradient(135deg,rgba(2,132,199,0.07),rgba(14,165,233,0.07));border:1px solid rgba(2,132,199,0.25);border-radius:20px;padding:1.75rem 2rem">
+      <div>
+        <div style="font-size:1.55rem;font-weight:900;color:#fff;margin-bottom:0.3rem;letter-spacing:-0.5px">Print It PK</div>
+        <div style="font-size:0.8rem;color:#38bdf8;margin-bottom:0.9rem;font-weight:600">🌐 printitpk.com</div>
+        <p style="color:#cbd5e1;font-size:0.82rem;line-height:1.75;margin-bottom:1rem">Pakistan's growing printing solutions provider — Softco Digital built a conversion-optimized e-commerce platform bringing custom print orders online.</p>
+        <div style="display:flex;gap:0.45rem;flex-wrap:wrap;margin-bottom:1.1rem">
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;font-weight:600;background:rgba(2,132,199,0.1);border:1px solid rgba(2,132,199,0.3);color:#38bdf8">E-Commerce</span>
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;font-weight:600;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);color:var(--purple2)">Web Development</span>
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;font-weight:600;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);color:#6ee7b7">SEO</span>
+        </div>
+        <a href="https://printitpk.com" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:0.55rem 1.4rem;border-radius:50px;background:linear-gradient(135deg,#0284c7,#0ea5e9);color:#fff;font-weight:700;font-size:0.82rem;text-decoration:none;box-shadow:0 0 30px rgba(2,132,199,0.35)">Visit Website ↗</a>
+      </div>
+      <div style="animation:float 6s ease-in-out infinite;animation-delay:0.3s">
+        <div class="mock-browser" style="box-shadow:0 16px 50px rgba(2,132,199,0.15)">
+          <div class="mock-bar"><div class="mock-dot" style="background:#ff5f57"></div><div class="mock-dot" style="background:#febc2e"></div><div class="mock-dot" style="background:#28c840"></div><div class="mock-url">🔒 printitpk.com</div></div>
+          <div style="background:#0d1117;padding:14px">
+            <div style="background:linear-gradient(135deg,rgba(2,132,199,0.12),rgba(14,165,233,0.08));border:1px solid rgba(2,132,199,0.15);border-radius:8px;padding:14px;margin-bottom:10px">
+              <div style="font-size:0.8rem;font-weight:800;color:#38bdf8;margin-bottom:8px">Print It PK</div>
+              <div style="height:6px;background:rgba(255,255,255,0.06);border-radius:3px;margin-bottom:5px;width:80%"></div>
+              <div style="height:6px;background:rgba(255,255,255,0.06);border-radius:3px;width:65%"></div>
+            </div>
+            <div style="display:flex;gap:6px">
+              <span style="padding:3px 8px;border-radius:4px;font-size:0.6rem;background:rgba(2,132,199,0.12);border:1px solid rgba(2,132,199,0.2);color:#38bdf8;font-weight:600">E-Commerce</span>
+              <span style="padding:3px 8px;border-radius:4px;font-size:0.6rem;background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.2);color:#6ee7b7;font-weight:600">SEO</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Ziba Collections -->
+    <div style="display:grid;grid-template-columns:1fr 1.45fr;gap:2rem;align-items:center;background:linear-gradient(135deg,rgba(168,85,247,0.07),rgba(236,72,153,0.07));border:1px solid rgba(168,85,247,0.25);border-radius:20px;padding:1.75rem 2rem">
+      <div>
+        <div style="font-size:1.55rem;font-weight:900;color:#fff;margin-bottom:0.3rem;letter-spacing:-0.5px">Ziba Collections</div>
+        <div style="font-size:0.8rem;color:#c084fc;margin-bottom:0.9rem;font-weight:600">🌐 zibacollections.co.uk</div>
+        <p style="color:#cbd5e1;font-size:0.82rem;line-height:1.75;margin-bottom:1rem">UK-based fashion boutique that trusted Softco Digital to craft a stunning online presence — showcasing exclusive collections to a global audience.</p>
+        <div style="display:flex;gap:0.45rem;flex-wrap:wrap;margin-bottom:1.1rem">
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;font-weight:600;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.3);color:#c084fc">E-Commerce</span>
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;font-weight:600;background:rgba(236,72,153,0.1);border:1px solid rgba(236,72,153,0.3);color:#f9a8d4">Web Design</span>
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;font-weight:600;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);color:var(--purple2)">Digital Marketing</span>
+        </div>
+        <a href="https://zibacollections.co.uk" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:0.55rem 1.4rem;border-radius:50px;background:linear-gradient(135deg,#a855f7,#ec4899);color:#fff;font-weight:700;font-size:0.82rem;text-decoration:none;box-shadow:0 0 30px rgba(168,85,247,0.35)">Visit Website ↗</a>
+      </div>
+      <div style="animation:float 6s ease-in-out infinite;animation-delay:0.6s">
+        <div class="mock-browser" style="box-shadow:0 16px 50px rgba(168,85,247,0.15)">
+          <div class="mock-bar"><div class="mock-dot" style="background:#ff5f57"></div><div class="mock-dot" style="background:#febc2e"></div><div class="mock-dot" style="background:#28c840"></div><div class="mock-url">🔒 zibacollections.co.uk</div></div>
+          <div style="background:#0d1117;padding:14px">
+            <div style="background:linear-gradient(135deg,rgba(168,85,247,0.12),rgba(236,72,153,0.08));border:1px solid rgba(168,85,247,0.15);border-radius:8px;padding:14px;margin-bottom:10px">
+              <div style="font-size:0.8rem;font-weight:800;color:#c084fc;margin-bottom:8px">Ziba Collections</div>
+              <div style="height:6px;background:rgba(255,255,255,0.06);border-radius:3px;margin-bottom:5px;width:75%"></div>
+              <div style="height:6px;background:rgba(255,255,255,0.06);border-radius:3px;width:55%"></div>
+            </div>
+            <div style="display:flex;gap:6px">
+              <span style="padding:3px 8px;border-radius:4px;font-size:0.6rem;background:rgba(168,85,247,0.12);border:1px solid rgba(168,85,247,0.2);color:#c084fc;font-weight:600">Fashion</span>
+              <span style="padding:3px 8px;border-radius:4px;font-size:0.6rem;background:rgba(236,72,153,0.12);border:1px solid rgba(236,72,153,0.2);color:#f9a8d4;font-weight:600">UK Brand</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Companion -->
+    <div style="display:grid;grid-template-columns:1fr 1.45fr;gap:2rem;align-items:center;background:linear-gradient(135deg,rgba(6,182,212,0.07),rgba(14,165,233,0.07));border:1px solid rgba(6,182,212,0.25);border-radius:20px;padding:1.75rem 2rem">
+      <div>
+        <div style="font-size:1.55rem;font-weight:900;color:#fff;margin-bottom:0.3rem;letter-spacing:-0.5px">Companion</div>
+        <div style="font-size:0.8rem;color:#22d3ee;margin-bottom:0.9rem;font-weight:600">🌐 companion.com.pk</div>
+        <p style="color:#cbd5e1;font-size:0.82rem;line-height:1.75;margin-bottom:1rem">A growing Pakistani brand empowered by Softco Digital's full-stack digital solutions — from a strong online presence to targeted audience growth campaigns.</p>
+        <div style="display:flex;gap:0.45rem;flex-wrap:wrap;margin-bottom:1.1rem">
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;font-weight:600;background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.3);color:#22d3ee">Web Development</span>
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;font-weight:600;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);color:var(--purple2)">Social Media</span>
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;font-weight:600;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);color:#6ee7b7">SEO</span>
+        </div>
+        <a href="https://companion.com.pk" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:0.55rem 1.4rem;border-radius:50px;background:linear-gradient(135deg,#06b6d4,#0ea5e9);color:#fff;font-weight:700;font-size:0.82rem;text-decoration:none;box-shadow:0 0 30px rgba(6,182,212,0.35)">Visit Website ↗</a>
+      </div>
+      <div style="animation:float 6s ease-in-out infinite;animation-delay:0.9s">
+        <div class="mock-browser" style="box-shadow:0 16px 50px rgba(6,182,212,0.15)">
+          <div class="mock-bar"><div class="mock-dot" style="background:#ff5f57"></div><div class="mock-dot" style="background:#febc2e"></div><div class="mock-dot" style="background:#28c840"></div><div class="mock-url">🔒 companion.com.pk</div></div>
+          <div style="background:#0d1117;padding:14px">
+            <div style="background:linear-gradient(135deg,rgba(6,182,212,0.12),rgba(14,165,233,0.08));border:1px solid rgba(6,182,212,0.15);border-radius:8px;padding:14px;margin-bottom:10px">
+              <div style="font-size:0.8rem;font-weight:800;color:#22d3ee;margin-bottom:8px">Companion</div>
+              <div style="height:6px;background:rgba(255,255,255,0.06);border-radius:3px;margin-bottom:5px;width:78%"></div>
+              <div style="height:6px;background:rgba(255,255,255,0.06);border-radius:3px;width:58%"></div>
+            </div>
+            <div style="display:flex;gap:6px">
+              <span style="padding:3px 8px;border-radius:4px;font-size:0.6rem;background:rgba(6,182,212,0.12);border:1px solid rgba(6,182,212,0.2);color:#22d3ee;font-weight:600">Web Dev</span>
+              <span style="padding:3px 8px;border-radius:4px;font-size:0.6rem;background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.2);color:#6ee7b7;font-weight:600">SEO</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Mirage Collection -->
+    <div style="display:grid;grid-template-columns:1fr 1.45fr;gap:2rem;align-items:center;background:linear-gradient(135deg,rgba(139,92,246,0.07),rgba(109,40,217,0.07));border:1px solid rgba(139,92,246,0.25);border-radius:20px;padding:1.75rem 2rem">
+      <div>
+        <div style="font-size:1.55rem;font-weight:900;color:#fff;margin-bottom:0.3rem;letter-spacing:-0.5px">Mirage Collection</div>
+        <div style="font-size:0.8rem;color:var(--purple2);margin-bottom:0.9rem;font-weight:600">🌐 miragecollection.com</div>
+        <p style="color:#cbd5e1;font-size:0.82rem;line-height:1.75;margin-bottom:1rem">Premium fashion label elevated online through Softco Digital's bespoke web design — seamlessly blending aesthetics with high-conversion e-commerce.</p>
+        <div style="display:flex;gap:0.45rem;flex-wrap:wrap;margin-bottom:1.1rem">
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;font-weight:600;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);color:var(--purple2)">E-Commerce</span>
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;font-weight:600;background:rgba(236,72,153,0.1);border:1px solid rgba(236,72,153,0.3);color:#f9a8d4">Branding</span>
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;font-weight:600;background:rgba(14,165,233,0.1);border:1px solid rgba(14,165,233,0.3);color:var(--blue2)">Digital Marketing</span>
+        </div>
+        <a href="https://miragecollection.com" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:0.55rem 1.4rem;border-radius:50px;background:linear-gradient(135deg,#8b5cf6,#6d28d9);color:#fff;font-weight:700;font-size:0.82rem;text-decoration:none;box-shadow:0 0 30px rgba(139,92,246,0.35)">Visit Website ↗</a>
+      </div>
+      <div style="animation:float 6s ease-in-out infinite;animation-delay:1.2s">
+        <div class="mock-browser" style="box-shadow:0 16px 50px rgba(139,92,246,0.15)">
+          <div class="mock-bar"><div class="mock-dot" style="background:#ff5f57"></div><div class="mock-dot" style="background:#febc2e"></div><div class="mock-dot" style="background:#28c840"></div><div class="mock-url">🔒 miragecollection.com</div></div>
+          <div style="background:#0d1117;padding:14px">
+            <div style="background:linear-gradient(135deg,rgba(139,92,246,0.12),rgba(109,40,217,0.08));border:1px solid rgba(139,92,246,0.15);border-radius:8px;padding:14px;margin-bottom:10px">
+              <div style="font-size:0.8rem;font-weight:800;color:var(--purple2);margin-bottom:8px">Mirage Collection</div>
+              <div style="height:6px;background:rgba(255,255,255,0.06);border-radius:3px;margin-bottom:5px;width:72%"></div>
+              <div style="height:6px;background:rgba(255,255,255,0.06);border-radius:3px;width:55%"></div>
+            </div>
+            <div style="display:flex;gap:6px">
+              <span style="padding:3px 8px;border-radius:4px;font-size:0.6rem;background:rgba(139,92,246,0.12);border:1px solid rgba(139,92,246,0.2);color:var(--purple2);font-weight:600">Fashion</span>
+              <span style="padding:3px 8px;border-radius:4px;font-size:0.6rem;background:rgba(236,72,153,0.12);border:1px solid rgba(236,72,153,0.2);color:#f9a8d4;font-weight:600">Branding</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. Little N Loom -->
+    <div style="display:grid;grid-template-columns:1fr 1.45fr;gap:2rem;align-items:center;background:linear-gradient(135deg,rgba(244,63,94,0.07),rgba(251,113,133,0.07));border:1px solid rgba(244,63,94,0.25);border-radius:20px;padding:1.75rem 2rem">
+      <div>
+        <div style="font-size:1.55rem;font-weight:900;color:#fff;margin-bottom:0.3rem;letter-spacing:-0.5px">Little N Loom</div>
+        <div style="font-size:0.8rem;color:#fb7185;margin-bottom:0.9rem;font-weight:600">🌐 littlenloom.com</div>
+        <p style="color:#cbd5e1;font-size:0.82rem;line-height:1.75;margin-bottom:1rem">Charming children's wear brand with a delightful online store built by Softco Digital — designed to engage parents and drive seamless purchases.</p>
+        <div style="display:flex;gap:0.45rem;flex-wrap:wrap;margin-bottom:1.1rem">
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;font-weight:600;background:rgba(244,63,94,0.1);border:1px solid rgba(244,63,94,0.3);color:#fb7185">E-Commerce</span>
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;font-weight:600;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);color:var(--purple2)">Web Design</span>
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;font-weight:600;background:rgba(14,165,233,0.1);border:1px solid rgba(14,165,233,0.3);color:var(--blue2)">Branding</span>
+        </div>
+        <a href="https://littlenloom.com" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:0.55rem 1.4rem;border-radius:50px;background:linear-gradient(135deg,#f43f5e,#ec4899);color:#fff;font-weight:700;font-size:0.82rem;text-decoration:none;box-shadow:0 0 30px rgba(244,63,94,0.35)">Visit Website ↗</a>
+      </div>
+      <div style="animation:float 6s ease-in-out infinite;animation-delay:1.5s">
+        <div class="mock-browser" style="box-shadow:0 16px 50px rgba(244,63,94,0.15)">
+          <div class="mock-bar"><div class="mock-dot" style="background:#ff5f57"></div><div class="mock-dot" style="background:#febc2e"></div><div class="mock-dot" style="background:#28c840"></div><div class="mock-url">🔒 littlenloom.com</div></div>
+          <div style="background:#0d1117;padding:14px">
+            <div style="background:linear-gradient(135deg,rgba(244,63,94,0.12),rgba(251,113,133,0.08));border:1px solid rgba(244,63,94,0.15);border-radius:8px;padding:14px;margin-bottom:10px">
+              <div style="font-size:0.8rem;font-weight:800;color:#fb7185;margin-bottom:8px">Little N Loom</div>
+              <div style="height:6px;background:rgba(255,255,255,0.06);border-radius:3px;margin-bottom:5px;width:76%"></div>
+              <div style="height:6px;background:rgba(255,255,255,0.06);border-radius:3px;width:58%"></div>
+            </div>
+            <div style="display:flex;gap:6px">
+              <span style="padding:3px 8px;border-radius:4px;font-size:0.6rem;background:rgba(244,63,94,0.12);border:1px solid rgba(244,63,94,0.2);color:#fb7185;font-weight:600">Kids Wear</span>
+              <span style="padding:3px 8px;border-radius:4px;font-size:0.6rem;background:rgba(139,92,246,0.12);border:1px solid rgba(139,92,246,0.2);color:var(--purple2);font-weight:600">E-Commerce</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. Khuwab by Kazma -->
+    <div style="display:grid;grid-template-columns:1fr 1.45fr;gap:2rem;align-items:center;background:linear-gradient(135deg,rgba(245,158,11,0.07),rgba(217,119,6,0.07));border:1px solid rgba(245,158,11,0.25);border-radius:20px;padding:1.75rem 2rem">
+      <div>
+        <div style="font-size:1.55rem;font-weight:900;color:#fff;margin-bottom:0.3rem;letter-spacing:-0.5px">Khuwab by Kazma</div>
+        <div style="font-size:0.8rem;color:#fbbf24;margin-bottom:0.9rem;font-weight:600">🌐 khuwabbykazma.com</div>
+        <p style="color:#cbd5e1;font-size:0.82rem;line-height:1.75;margin-bottom:1rem">Luxury fashion brand brought to life online — Softco Digital crafted a sophisticated digital presence that captures the brand's essence and drives sales.</p>
+        <div style="display:flex;gap:0.45rem;flex-wrap:wrap;margin-bottom:1.1rem">
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;font-weight:600;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);color:#fbbf24">E-Commerce</span>
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;font-weight:600;background:rgba(236,72,153,0.1);border:1px solid rgba(236,72,153,0.3);color:#f9a8d4">Social Media</span>
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;font-weight:600;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);color:var(--purple2)">Branding</span>
+        </div>
+        <a href="https://khuwabbykazma.com" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:0.55rem 1.4rem;border-radius:50px;background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;font-weight:700;font-size:0.82rem;text-decoration:none;box-shadow:0 0 30px rgba(245,158,11,0.35)">Visit Website ↗</a>
+      </div>
+      <div style="animation:float 6s ease-in-out infinite;animation-delay:1.8s">
+        <div class="mock-browser" style="box-shadow:0 16px 50px rgba(245,158,11,0.15)">
+          <div class="mock-bar"><div class="mock-dot" style="background:#ff5f57"></div><div class="mock-dot" style="background:#febc2e"></div><div class="mock-dot" style="background:#28c840"></div><div class="mock-url">🔒 khuwabbykazma.com</div></div>
+          <div style="background:#0d1117;padding:14px">
+            <div style="background:linear-gradient(135deg,rgba(245,158,11,0.12),rgba(217,119,6,0.08));border:1px solid rgba(245,158,11,0.15);border-radius:8px;padding:14px;margin-bottom:10px">
+              <div style="font-size:0.8rem;font-weight:800;color:#fbbf24;margin-bottom:8px">Khuwab by Kazma</div>
+              <div style="height:6px;background:rgba(255,255,255,0.06);border-radius:3px;margin-bottom:5px;width:80%"></div>
+              <div style="height:6px;background:rgba(255,255,255,0.06);border-radius:3px;width:62%"></div>
+            </div>
+            <div style="display:flex;gap:6px">
+              <span style="padding:3px 8px;border-radius:4px;font-size:0.6rem;background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.2);color:#fbbf24;font-weight:600">Luxury</span>
+              <span style="padding:3px 8px;border-radius:4px;font-size:0.6rem;background:rgba(236,72,153,0.12);border:1px solid rgba(236,72,153,0.2);color:#f9a8d4;font-weight:600">Fashion</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. Zero Makeup -->
+    <div style="display:grid;grid-template-columns:1fr 1.45fr;gap:2rem;align-items:center;background:linear-gradient(135deg,rgba(236,72,153,0.07),rgba(168,85,247,0.07));border:1px solid rgba(236,72,153,0.25);border-radius:20px;padding:1.75rem 2rem">
+      <div>
+        <div style="font-size:1.55rem;font-weight:900;color:#fff;margin-bottom:0.3rem;letter-spacing:-0.5px">Zero Makeup</div>
+        <div style="font-size:0.8rem;color:#f9a8d4;margin-bottom:0.9rem;font-weight:600">🌐 zeromakeup.com</div>
+        <p style="color:#cbd5e1;font-size:0.82rem;line-height:1.75;margin-bottom:1rem">Beauty and cosmetics brand scaling online with Softco Digital's conversion-focused e-commerce platform and targeted digital marketing strategy.</p>
+        <div style="display:flex;gap:0.45rem;flex-wrap:wrap;margin-bottom:1.1rem">
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;font-weight:600;background:rgba(236,72,153,0.1);border:1px solid rgba(236,72,153,0.3);color:#f9a8d4">E-Commerce</span>
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;font-weight:600;background:rgba(14,165,233,0.1);border:1px solid rgba(14,165,233,0.3);color:var(--blue2)">Digital Marketing</span>
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;font-weight:600;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);color:#6ee7b7">SEO</span>
+        </div>
+        <a href="https://zeromakeup.com" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:0.55rem 1.4rem;border-radius:50px;background:linear-gradient(135deg,#ec4899,#a855f7);color:#fff;font-weight:700;font-size:0.82rem;text-decoration:none;box-shadow:0 0 30px rgba(236,72,153,0.35)">Visit Website ↗</a>
+      </div>
+      <div style="animation:float 6s ease-in-out infinite;animation-delay:2.1s">
+        <div class="mock-browser" style="box-shadow:0 16px 50px rgba(236,72,153,0.15)">
+          <div class="mock-bar"><div class="mock-dot" style="background:#ff5f57"></div><div class="mock-dot" style="background:#febc2e"></div><div class="mock-dot" style="background:#28c840"></div><div class="mock-url">🔒 zeromakeup.com</div></div>
+          <div style="background:#0d1117;padding:14px">
+            <div style="background:linear-gradient(135deg,rgba(236,72,153,0.12),rgba(168,85,247,0.08));border:1px solid rgba(236,72,153,0.15);border-radius:8px;padding:14px;margin-bottom:10px">
+              <div style="font-size:0.8rem;font-weight:800;color:#f9a8d4;margin-bottom:8px">Zero Makeup</div>
+              <div style="height:6px;background:rgba(255,255,255,0.06);border-radius:3px;margin-bottom:5px;width:74%"></div>
+              <div style="height:6px;background:rgba(255,255,255,0.06);border-radius:3px;width:58%"></div>
+            </div>
+            <div style="display:flex;gap:6px">
+              <span style="padding:3px 8px;border-radius:4px;font-size:0.6rem;background:rgba(236,72,153,0.12);border:1px solid rgba(236,72,153,0.2);color:#f9a8d4;font-weight:600">Beauty</span>
+              <span style="padding:3px 8px;border-radius:4px;font-size:0.6rem;background:rgba(14,165,233,0.12);border:1px solid rgba(14,165,233,0.2);color:var(--blue2);font-weight:600">Marketing</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. Malook -->
+    <div style="display:grid;grid-template-columns:1fr 1.45fr;gap:2rem;align-items:center;background:linear-gradient(135deg,rgba(16,185,129,0.07),rgba(5,150,105,0.07));border:1px solid rgba(16,185,129,0.25);border-radius:20px;padding:1.75rem 2rem">
+      <div>
+        <div style="font-size:1.55rem;font-weight:900;color:#fff;margin-bottom:0.3rem;letter-spacing:-0.5px">Malook</div>
+        <div style="font-size:0.8rem;color:#6ee7b7;margin-bottom:0.9rem;font-weight:600">🌐 malook.pk</div>
+        <p style="color:#cbd5e1;font-size:0.82rem;line-height:1.75;margin-bottom:1rem">A stylish fashion destination enhanced through Softco Digital's creative web solutions — combining visual appeal with data-driven growth marketing.</p>
+        <div style="display:flex;gap:0.45rem;flex-wrap:wrap;margin-bottom:1.1rem">
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;font-weight:600;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);color:#6ee7b7">Web Development</span>
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;font-weight:600;background:rgba(14,165,233,0.1);border:1px solid rgba(14,165,233,0.3);color:var(--blue2)">Digital Marketing</span>
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;font-weight:600;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);color:var(--purple2)">SEO</span>
+        </div>
+        <a href="https://malook.pk" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:0.55rem 1.4rem;border-radius:50px;background:linear-gradient(135deg,#10b981,#059669);color:#fff;font-weight:700;font-size:0.82rem;text-decoration:none;box-shadow:0 0 30px rgba(16,185,129,0.35)">Visit Website ↗</a>
+      </div>
+      <div style="animation:float 6s ease-in-out infinite;animation-delay:2.4s">
+        <div class="mock-browser" style="box-shadow:0 16px 50px rgba(16,185,129,0.15)">
+          <div class="mock-bar"><div class="mock-dot" style="background:#ff5f57"></div><div class="mock-dot" style="background:#febc2e"></div><div class="mock-dot" style="background:#28c840"></div><div class="mock-url">🔒 malook.pk</div></div>
+          <div style="background:#0d1117;padding:14px">
+            <div style="background:linear-gradient(135deg,rgba(16,185,129,0.12),rgba(5,150,105,0.08));border:1px solid rgba(16,185,129,0.15);border-radius:8px;padding:14px;margin-bottom:10px">
+              <div style="font-size:0.8rem;font-weight:800;color:#6ee7b7;margin-bottom:8px">Malook</div>
+              <div style="height:6px;background:rgba(255,255,255,0.06);border-radius:3px;margin-bottom:5px;width:70%"></div>
+              <div style="height:6px;background:rgba(255,255,255,0.06);border-radius:3px;width:52%"></div>
+            </div>
+            <div style="display:flex;gap:6px">
+              <span style="padding:3px 8px;border-radius:4px;font-size:0.6rem;background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.2);color:#6ee7b7;font-weight:600">Fashion</span>
+              <span style="padding:3px 8px;border-radius:4px;font-size:0.6rem;background:rgba(14,165,233,0.12);border:1px solid rgba(14,165,233,0.2);color:var(--blue2);font-weight:600">Marketing</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10. Clock World -->
+    <div style="display:grid;grid-template-columns:1fr 1.45fr;gap:2rem;align-items:center;background:linear-gradient(135deg,rgba(100,116,139,0.07),rgba(71,85,105,0.07));border:1px solid rgba(100,116,139,0.25);border-radius:20px;padding:1.75rem 2rem">
+      <div>
+        <div style="font-size:1.55rem;font-weight:900;color:#fff;margin-bottom:0.3rem;letter-spacing:-0.5px">Clock World</div>
+        <div style="font-size:0.8rem;color:#94a3b8;margin-bottom:0.9rem;font-weight:600">🌐 clockworld.com.pk</div>
+        <p style="color:#cbd5e1;font-size:0.82rem;line-height:1.75;margin-bottom:1rem">Premier timepiece retailer with a polished online store crafted by Softco Digital — designed for discovery, customer trust, and consistent sales.</p>
+        <div style="display:flex;gap:0.45rem;flex-wrap:wrap;margin-bottom:1.1rem">
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;font-weight:600;background:rgba(100,116,139,0.1);border:1px solid rgba(100,116,139,0.3);color:#94a3b8">E-Commerce</span>
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;font-weight:600;background:rgba(14,165,233,0.1);border:1px solid rgba(14,165,233,0.3);color:var(--blue2)">Web Design</span>
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;font-weight:600;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);color:#6ee7b7">SEO</span>
+        </div>
+        <a href="https://clockworld.com.pk" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:0.55rem 1.4rem;border-radius:50px;background:linear-gradient(135deg,#64748b,#475569);color:#fff;font-weight:700;font-size:0.82rem;text-decoration:none;box-shadow:0 0 30px rgba(100,116,139,0.35)">Visit Website ↗</a>
+      </div>
+      <div style="animation:float 6s ease-in-out infinite;animation-delay:0.5s">
+        <div class="mock-browser" style="box-shadow:0 16px 50px rgba(100,116,139,0.15)">
+          <div class="mock-bar"><div class="mock-dot" style="background:#ff5f57"></div><div class="mock-dot" style="background:#febc2e"></div><div class="mock-dot" style="background:#28c840"></div><div class="mock-url">🔒 clockworld.com.pk</div></div>
+          <div style="background:#0d1117;padding:14px">
+            <div style="background:linear-gradient(135deg,rgba(100,116,139,0.12),rgba(71,85,105,0.08));border:1px solid rgba(100,116,139,0.15);border-radius:8px;padding:14px;margin-bottom:10px">
+              <div style="font-size:0.8rem;font-weight:800;color:#94a3b8;margin-bottom:8px">Clock World</div>
+              <div style="height:6px;background:rgba(255,255,255,0.06);border-radius:3px;margin-bottom:5px;width:78%"></div>
+              <div style="height:6px;background:rgba(255,255,255,0.06);border-radius:3px;width:60%"></div>
+            </div>
+            <div style="display:flex;gap:6px">
+              <span style="padding:3px 8px;border-radius:4px;font-size:0.6rem;background:rgba(100,116,139,0.12);border:1px solid rgba(100,116,139,0.2);color:#94a3b8;font-weight:600">Timepieces</span>
+              <span style="padding:3px 8px;border-radius:4px;font-size:0.6rem;background:rgba(14,165,233,0.12);border:1px solid rgba(14,165,233,0.2);color:var(--blue2);font-weight:600">E-Commerce</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11. Galaxy Vapers -->
+    <div style="display:grid;grid-template-columns:1fr 1.45fr;gap:2rem;align-items:center;background:linear-gradient(135deg,rgba(79,70,229,0.07),rgba(124,58,237,0.07));border:1px solid rgba(79,70,229,0.25);border-radius:20px;padding:1.75rem 2rem">
+      <div>
+        <div style="font-size:1.55rem;font-weight:900;color:#fff;margin-bottom:0.3rem;letter-spacing:-0.5px">Galaxy Vapers</div>
+        <div style="font-size:0.8rem;color:#a5b4fc;margin-bottom:0.9rem;font-weight:600">🌐 galaxyvapers.com</div>
+        <p style="color:#cbd5e1;font-size:0.82rem;line-height:1.75;margin-bottom:1rem">Vaping products brand reaching the right audience through Softco Digital's targeted PPC campaigns and a sleek, user-friendly e-commerce experience.</p>
+        <div style="display:flex;gap:0.45rem;flex-wrap:wrap;margin-bottom:1.1rem">
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;font-weight:600;background:rgba(79,70,229,0.1);border:1px solid rgba(79,70,229,0.3);color:#a5b4fc">E-Commerce</span>
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;font-weight:600;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);color:#fbbf24">PPC Advertising</span>
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;font-weight:600;background:rgba(14,165,233,0.1);border:1px solid rgba(14,165,233,0.3);color:var(--blue2)">Digital Marketing</span>
+        </div>
+        <a href="https://galaxyvapers.com" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:0.55rem 1.4rem;border-radius:50px;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;font-weight:700;font-size:0.82rem;text-decoration:none;box-shadow:0 0 30px rgba(79,70,229,0.35)">Visit Website ↗</a>
+      </div>
+      <div style="animation:float 6s ease-in-out infinite;animation-delay:1s">
+        <div class="mock-browser" style="box-shadow:0 16px 50px rgba(79,70,229,0.15)">
+          <div class="mock-bar"><div class="mock-dot" style="background:#ff5f57"></div><div class="mock-dot" style="background:#febc2e"></div><div class="mock-dot" style="background:#28c840"></div><div class="mock-url">🔒 galaxyvapers.com</div></div>
+          <div style="background:#0d1117;padding:14px">
+            <div style="background:linear-gradient(135deg,rgba(79,70,229,0.12),rgba(124,58,237,0.08));border:1px solid rgba(79,70,229,0.15);border-radius:8px;padding:14px;margin-bottom:10px">
+              <div style="font-size:0.8rem;font-weight:800;color:#a5b4fc;margin-bottom:8px">Galaxy Vapers</div>
+              <div style="height:6px;background:rgba(255,255,255,0.06);border-radius:3px;margin-bottom:5px;width:76%"></div>
+              <div style="height:6px;background:rgba(255,255,255,0.06);border-radius:3px;width:57%"></div>
+            </div>
+            <div style="display:flex;gap:6px">
+              <span style="padding:3px 8px;border-radius:4px;font-size:0.6rem;background:rgba(79,70,229,0.12);border:1px solid rgba(79,70,229,0.2);color:#a5b4fc;font-weight:600">Vaping</span>
+              <span style="padding:3px 8px;border-radius:4px;font-size:0.6rem;background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.2);color:#fbbf24;font-weight:600">PPC</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 12. Iyana Jewelry -->
+    <div style="display:grid;grid-template-columns:1fr 1.45fr;gap:2rem;align-items:center;background:linear-gradient(135deg,rgba(225,29,72,0.07),rgba(251,146,60,0.07));border:1px solid rgba(225,29,72,0.25);border-radius:20px;padding:1.75rem 2rem">
+      <div>
+        <div style="font-size:1.55rem;font-weight:900;color:#fff;margin-bottom:0.3rem;letter-spacing:-0.5px">Iyana Jewelry</div>
+        <div style="font-size:0.8rem;color:#fda4af;margin-bottom:0.9rem;font-weight:600">🌐 iyanajewelry.com</div>
+        <p style="color:#cbd5e1;font-size:0.82rem;line-height:1.75;margin-bottom:1rem">Elegant jewelry brand with an exquisite online presence built by Softco Digital — bringing fine craftsmanship and beautiful design to customers worldwide.</p>
+        <div style="display:flex;gap:0.45rem;flex-wrap:wrap;margin-bottom:1.1rem">
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;font-weight:600;background:rgba(225,29,72,0.1);border:1px solid rgba(225,29,72,0.3);color:#fda4af">E-Commerce</span>
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;font-weight:600;background:rgba(251,146,60,0.1);border:1px solid rgba(251,146,60,0.3);color:#fdba74">Branding</span>
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;font-weight:600;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);color:var(--purple2)">Web Design</span>
+        </div>
+        <a href="https://iyanajewelry.com" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:0.55rem 1.4rem;border-radius:50px;background:linear-gradient(135deg,#e11d48,#fb923c);color:#fff;font-weight:700;font-size:0.82rem;text-decoration:none;box-shadow:0 0 30px rgba(225,29,72,0.35)">Visit Website ↗</a>
+      </div>
+      <div style="animation:float 6s ease-in-out infinite;animation-delay:1.4s">
+        <div class="mock-browser" style="box-shadow:0 16px 50px rgba(225,29,72,0.15)">
+          <div class="mock-bar"><div class="mock-dot" style="background:#ff5f57"></div><div class="mock-dot" style="background:#febc2e"></div><div class="mock-dot" style="background:#28c840"></div><div class="mock-url">🔒 iyanajewelry.com</div></div>
+          <div style="background:#0d1117;padding:14px">
+            <div style="background:linear-gradient(135deg,rgba(225,29,72,0.12),rgba(251,146,60,0.08));border:1px solid rgba(225,29,72,0.15);border-radius:8px;padding:14px;margin-bottom:10px">
+              <div style="font-size:0.8rem;font-weight:800;color:#fda4af;margin-bottom:8px">Iyana Jewelry</div>
+              <div style="height:6px;background:rgba(255,255,255,0.06);border-radius:3px;margin-bottom:5px;width:73%"></div>
+              <div style="height:6px;background:rgba(255,255,255,0.06);border-radius:3px;width:55%"></div>
+            </div>
+            <div style="display:flex;gap:6px">
+              <span style="padding:3px 8px;border-radius:4px;font-size:0.6rem;background:rgba(225,29,72,0.12);border:1px solid rgba(225,29,72,0.2);color:#fda4af;font-weight:600">Jewelry</span>
+              <span style="padding:3px 8px;border-radius:4px;font-size:0.6rem;background:rgba(251,146,60,0.12);border:1px solid rgba(251,146,60,0.2);color:#fdba74;font-weight:600">Luxury</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 13. Coats N Jackets -->
+    <div style="display:grid;grid-template-columns:1fr 1.45fr;gap:2rem;align-items:center;background:linear-gradient(135deg,rgba(3,105,161,0.07),rgba(14,165,233,0.07));border:1px solid rgba(3,105,161,0.25);border-radius:20px;padding:1.75rem 2rem">
+      <div>
+        <div style="font-size:1.55rem;font-weight:900;color:#fff;margin-bottom:0.3rem;letter-spacing:-0.5px">Coats N Jackets</div>
+        <div style="font-size:0.8rem;color:var(--blue2);margin-bottom:0.9rem;font-weight:600">🌐 coatsnjackets.com</div>
+        <p style="color:#cbd5e1;font-size:0.82rem;line-height:1.75;margin-bottom:1rem">Fashion outerwear brand with a comprehensive digital strategy by Softco Digital — driving traffic, engagement, and measurable sales growth.</p>
+        <div style="display:flex;gap:0.45rem;flex-wrap:wrap;margin-bottom:1.1rem">
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;font-weight:600;background:rgba(3,105,161,0.1);border:1px solid rgba(3,105,161,0.3);color:var(--blue2)">E-Commerce</span>
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;font-weight:600;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);color:var(--purple2)">Digital Marketing</span>
+          <span style="padding:3px 10px;border-radius:50px;font-size:0.7rem;font-weight:600;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);color:#6ee7b7">SEO</span>
+        </div>
+        <a href="https://coatsnjackets.com" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:0.55rem 1.4rem;border-radius:50px;background:linear-gradient(135deg,#0369a1,#0ea5e9);color:#fff;font-weight:700;font-size:0.82rem;text-decoration:none;box-shadow:0 0 30px rgba(3,105,161,0.35)">Visit Website ↗</a>
+      </div>
+      <div style="animation:float 6s ease-in-out infinite;animation-delay:1.8s">
+        <div class="mock-browser" style="box-shadow:0 16px 50px rgba(3,105,161,0.15)">
+          <div class="mock-bar"><div class="mock-dot" style="background:#ff5f57"></div><div class="mock-dot" style="background:#febc2e"></div><div class="mock-dot" style="background:#28c840"></div><div class="mock-url">🔒 coatsnjackets.com</div></div>
+          <div style="background:#0d1117;padding:14px">
+            <div style="background:linear-gradient(135deg,rgba(3,105,161,0.12),rgba(14,165,233,0.08));border:1px solid rgba(3,105,161,0.15);border-radius:8px;padding:14px;margin-bottom:10px">
+              <div style="font-size:0.8rem;font-weight:800;color:var(--blue2);margin-bottom:8px">Coats N Jackets</div>
+              <div style="height:6px;background:rgba(255,255,255,0.06);border-radius:3px;margin-bottom:5px;width:79%"></div>
+              <div style="height:6px;background:rgba(255,255,255,0.06);border-radius:3px;width:61%"></div>
+            </div>
+            <div style="display:flex;gap:6px">
+              <span style="padding:3px 8px;border-radius:4px;font-size:0.6rem;background:rgba(3,105,161,0.12);border:1px solid rgba(3,105,161,0.2);color:var(--blue2);font-weight:600">Outerwear</span>
+              <span style="padding:3px 8px;border-radius:4px;font-size:0.6rem;background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.2);color:#6ee7b7;font-weight:600">SEO</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center;padding:0.5rem 0 0.25rem;font-size:0.8rem;color:var(--muted)">
+      13 trusted clients and growing →
+      <a href="mailto:Support@Softcodigitalinc.com" style="color:var(--blue2);text-decoration:none;font-weight:600">Support@Softcodigitalinc.com</a>
+    </div>
+
+  </div>
+
+  <div class="slide-counter" style="position:relative;text-align:right;margin-top:2rem"><span>10</span> / 11</div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- SLIDE 11 · CONTACT -->
+<!-- ═══════════════════════════════════════ -->
+<section class="slide" id="contact" style="background:linear-gradient(135deg,#020818,#050f2e,#0a0820)">
+  <div class="orb" style="width:600px;height:600px;background:radial-gradient(circle,rgba(14,165,233,0.1),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+  <div class="grid-bg"></div>
+
+  <div style="position:relative;z-index:1;width:100%">
+    <div class="slide-label">Get In Touch</div>
+    <div class="grid-2" style="gap:5rem;align-items:center">
+      <div>
+        <h2 class="section-title">Let's Build<br>Something<br>Extraordinary</h2>
+        <div class="glow-divider"></div>
+        <p style="color:#cbd5e1;font-size:0.93rem;line-height:1.9;margin-bottom:2rem">
+          Ready to take your digital presence to the next level? Let's talk about your vision and how Softco Digital can turn it into reality — with passion, strategy, and proven results.
+        </p>
+
+        <div class="contact-item">
+          <div class="contact-icon">📧</div>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-value">Support@Softcodigitalinc.com</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <div class="contact-label">Phone</div>
+            <div class="contact-value">+1 551 307 7532</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📱</div>
+          <div>
+            <div class="contact-label">WhatsApp</div>
+            <div class="contact-value">wa.me/+15513077532</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-label">Address</div>
+            <div class="contact-value" style="font-size:0.82rem">Five Greentree Centre, 525 Route 73 North<br>Ste 104, Marlton, New Jersey 08053</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🌐</div>
+          <div>
+            <div class="contact-label">Website</div>
+            <div class="contact-value">softcodigitalinc.com</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;align-items:center;gap:2rem">
+        <!-- Social links -->
+        <div style="display:flex;gap:1rem">
+          <a href="https://facebook.com/softcodigitalinc" target="_blank" style="width:54px;height:54px;border-radius:14px;background:var(--glass);border:1px solid var(--glass-border);display:flex;align-items:center;justify-content:center;font-size:1.4rem;text-decoration:none;transition:all 0.3s" onmouseover="this.style.borderColor='rgba(14,165,233,0.5)';this.style.boxShadow='var(--glow-blue)'" onmouseout="this.style.borderColor='';this.style.boxShadow=''">📘</a>
+          <a href="https://linkedin.com/company/softco-digital" target="_blank" style="width:54px;height:54px;border-radius:14px;background:var(--glass);border:1px solid var(--glass-border);display:flex;align-items:center;justify-content:center;font-size:1.4rem;text-decoration:none;transition:all 0.3s" onmouseover="this.style.borderColor='rgba(14,165,233,0.5)';this.style.boxShadow='var(--glow-blue)'" onmouseout="this.style.borderColor='';this.style.boxShadow=''">💼</a>
+          <a href="https://wa.me/+15513077532" target="_blank" style="width:54px;height:54px;border-radius:14px;background:var(--glass);border:1px solid var(--glass-border);display:flex;align-items:center;justify-content:center;font-size:1.4rem;text-decoration:none;transition:all 0.3s" onmouseover="this.style.borderColor='rgba(16,185,129,0.5)';this.style.boxShadow='0 0 40px rgba(16,185,129,0.3)'" onmouseout="this.style.borderColor='';this.style.boxShadow=''">💬</a>
+        </div>
+
+        <!-- Highlight card -->
+        <div style="width:100%;max-width:320px;background:linear-gradient(135deg,rgba(14,165,233,0.08),rgba(139,92,246,0.08));border:1px solid rgba(14,165,233,0.2);border-radius:24px;padding:2rem;text-align:center">
+          <div style="display:flex;justify-content:center;margin-bottom:1.25rem">
+            <img src="softco.jpg" alt="Softco Digital" style="width:70px;height:70px;object-fit:contain;background:#fff;border-radius:12px;padding:4px">
+          </div>
+          <div style="font-size:0.8rem;color:var(--muted);margin-bottom:0.75rem">Why start today?</div>
+          <div style="display:flex;flex-direction:column;gap:0.5rem;text-align:left">
+            <div style="display:flex;gap:8px;align-items:center;font-size:0.82rem;color:#e2e8f0"><span style="color:var(--blue2)">✓</span> Free consultation call</div>
+            <div style="display:flex;gap:8px;align-items:center;font-size:0.82rem;color:#e2e8f0"><span style="color:var(--blue2)">✓</span> Custom strategy for your business</div>
+            <div style="display:flex;gap:8px;align-items:center;font-size:0.82rem;color:#e2e8f0"><span style="color:var(--blue2)">✓</span> No generic solutions — ever</div>
+            <div style="display:flex;gap:8px;align-items:center;font-size:0.82rem;color:#e2e8f0"><span style="color:var(--blue2)">✓</span> Results-backed 11-year track record</div>
+          </div>
+          <div style="margin-top:1.5rem">
+            <a href="https://softcodigitalinc.com" target="_blank" class="btn-primary" style="font-size:0.88rem;padding:0.75rem 2rem">Start Your Project ↗</a>
+          </div>
+        </div>
+
+        <!-- Location badges -->
+        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:center">
+          <span class="loc-pill">📍 New Jersey</span>
+          <span class="loc-pill">📍 4 Locations</span>
+          <span class="loc-pill">🌍 Global</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="position:relative;z-index:1;border-top:1px solid var(--glass-border);margin-top:3rem;padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem">
+    <div style="font-size:1rem;font-weight:800;background:linear-gradient(135deg,var(--blue),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Softco Digital.</div>
+    <div style="font-size:0.75rem;color:var(--muted)">© 2025 Softco Digital Inc — Shaping Digital Success with Passion and Strategy</div>
+    <div style="font-size:0.75rem;color:var(--muted)">softcodigitalinc.com</div>
+  </div>
+
+  <div class="slide-counter"><span>11</span> / 11</div>
+</section>
+
+</div>
+
+<script>
+// Nav dots
+const slides = document.querySelectorAll('.slide');
+const dotsContainer = document.getElementById('navDots');
+slides.forEach((_,i)=>{
+  const d = document.createElement('div');
+  d.className='nav-dot'+(i===0?' active':'');
+  d.title='Slide '+(i+1);
+  d.onclick=()=>slides[i].scrollIntoView({behavior:'smooth'});
+  dotsContainer.appendChild(d);
+});
+
+// Update active dot on scroll
+const obs = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const idx=Array.from(slides).indexOf(e.target);
+      document.querySelectorAll('.nav-dot').forEach((d,i)=>d.classList.toggle('active',i===idx));
+    }
+  });
+},{threshold:0.5});
+slides.forEach(s=>obs.observe(s));
+
+// Keyboard navigation
+document.addEventListener('keydown',e=>{
+  const current=Array.from(slides).findIndex(s=>{
+    const r=s.getBoundingClientRect();
+    return r.top>=0&&r.top<window.innerHeight*0.5;
+  });
+  if(e.key==='ArrowDown'&&current<slides.length-1) slides[current+1].scrollIntoView({behavior:'smooth'});
+  if(e.key==='ArrowUp'&&current>0) slides[current-1].scrollIntoView({behavior:'smooth'});
+});
+
+// ═══════════════════════════════════════
+// PREMIUM CLIENT SHOWCASE CAROUSEL
+// ═══════════════════════════════════════
+(function(){
+  const clients=[
+    {name:'Edge Republic',     url:'edge.pk',               tags:['Web Dev','Digital Marketing','SEO'],    p:[14,165,233],  s:[139,92,246], a:'#38bdf8'},
+    {name:'Print It PK',       url:'printitpk.com',         tags:['E-Commerce','Web Development','SEO'],   p:[6,182,212],   s:[2,132,199],  a:'#22d3ee'},
+    {name:'Ziba Collections',  url:'zibacollections.co.uk', tags:['E-Commerce','Fashion','UK Brand'],      p:[168,85,247],  s:[236,72,153], a:'#c084fc'},
+    {name:'Companion',         url:'companion.com.pk',      tags:['Web Dev','Social Media','SEO'],         p:[6,182,212],   s:[14,165,233], a:'#22d3ee'},
+    {name:'Mirage Collection', url:'miragecollection.com',  tags:['E-Commerce','Branding','Fashion'],      p:[124,58,237],  s:[79,70,229],  a:'#a78bfa'},
+    {name:'Little N Loom',     url:'littlenloom.com',       tags:['E-Commerce','Kids Wear','Branding'],    p:[244,63,94],   s:[251,146,60], a:'#fb7185'},
+    {name:'Khuwab by Kazma',   url:'khuwabbykazma.com',     tags:['Luxury Fashion','Social Media','Branding'], p:[245,158,11],s:[217,119,6],a:'#fbbf24'},
+    {name:'Zero Makeup',       url:'zeromakeup.com',        tags:['Beauty','E-Commerce','Marketing'],      p:[236,72,153],  s:[168,85,247], a:'#f9a8d4'},
+    {name:'Malook',            url:'malook.pk',             tags:['Fashion','Web Dev','SEO'],              p:[16,185,129],  s:[6,182,212],  a:'#6ee7b7'},
+    {name:'Clock World',       url:'clockworld.com.pk',     tags:['Timepieces','E-Commerce','SEO'],        p:[100,116,139], s:[148,163,184],a:'#94a3b8'},
+    {name:'Galaxy Vapers',     url:'galaxyvapers.com',      tags:['Vaping','PPC Ads','E-Commerce'],        p:[79,70,229],   s:[124,58,237], a:'#a5b4fc'},
+    {name:'Iyana Jewelry',     url:'iyanajewelry.com',      tags:['Jewelry','Luxury','Branding'],          p:[225,29,72],   s:[249,115,22], a:'#fda4af'},
+    {name:'Coats N Jackets',   url:'coatsnjackets.com',     tags:['Outerwear','E-Commerce','SEO'],         p:[3,105,161],   s:[14,165,233], a:'#38bdf8'},
+  ];
+
+  function card(cl,idx){
+    const[r,g,b]=cl.p,[r2,g2,b2]=cl.s;
+    const d1=(idx*0.4)%3, d2=(idx*0.4+1.9)%3;
+    const bgR=Math.max(2,Math.round(r*0.055)),bgG=Math.max(8,Math.round(g*0.045)),bgB=Math.max(22,Math.round(b*0.13));
+    const bg2R=Math.max(4,Math.round(r*0.08)),bg2G=Math.max(11,Math.round(g*0.065)),bg2B=Math.max(28,Math.round(b*0.17));
+    const tc=[[r,g,b],[r2,g2,b2],[r,g,b]];
+    return `<div class="sc-card" onmouseover="this.style.transform='translateY(-10px) scale(1.02)';this.style.boxShadow='0 32px 80px rgba(0,0,0,0.55),0 0 45px rgba(${r},${g},${b},0.15)'" onmouseout="this.style.transform='';this.style.boxShadow='0 20px 60px rgba(0,0,0,0.45)'">
+<div class="sc-preview" style="background:linear-gradient(150deg,rgb(${bgR},${bgG},${bgB}),rgb(${bg2R},${bg2G},${bg2B}))">
+<div style="height:26px;background:rgba(0,0,0,0.42);display:flex;align-items:center;padding:0 10px;gap:6px;position:relative;z-index:3">
+<div style="width:7px;height:7px;border-radius:50%;background:#ff5f57"></div><div style="width:7px;height:7px;border-radius:50%;background:#febc2e"></div><div style="width:7px;height:7px;border-radius:50%;background:#28c840"></div>
+<div style="flex:1;height:14px;border-radius:4px;background:rgba(255,255,255,0.06);margin:0 8px;display:flex;align-items:center;padding:0 8px"><span style="font-size:0.5rem;color:#94a3b8">🔒 ${cl.url}</span></div></div>
+<div style="padding:10px;height:calc(100% - 26px);display:flex;flex-direction:column;gap:7px;position:relative;z-index:2">
+<div style="background:rgba(${r},${g},${b},0.1);border:1px solid rgba(${r},${g},${b},0.14);border-radius:8px;flex:1;padding:12px;position:relative;overflow:hidden">
+<div style="height:8px;background:linear-gradient(90deg,rgb(${r},${g},${b}),rgb(${r2},${g2},${b2}));border-radius:4px;width:62%;margin-bottom:8px"></div>
+<div style="height:5px;background:rgba(255,255,255,0.07);border-radius:3px;width:88%;margin-bottom:5px"></div>
+<div style="height:5px;background:rgba(255,255,255,0.07);border-radius:3px;width:70%"></div>
+<div style="position:absolute;bottom:10px;left:12px;padding:3px 12px;border-radius:20px;background:linear-gradient(135deg,rgb(${r},${g},${b}),rgb(${r2},${g2},${b2}));font-size:0.5rem;color:#fff;font-weight:700">Explore →</div>
+<div style="position:absolute;right:-10px;top:-10px;width:65px;height:65px;border-radius:50%;background:radial-gradient(circle,rgba(${r},${g},${b},0.4),transparent);filter:blur(18px)"></div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;height:44px">
+<div style="background:rgba(${r},${g},${b},0.1);border-radius:6px;border:1px solid rgba(${r},${g},${b},0.2)"></div>
+<div style="background:rgba(${r2},${g2},${b2},0.1);border-radius:6px;border:1px solid rgba(${r2},${g2},${b2},0.2)"></div>
+<div style="background:rgba(${r},${g},${b},0.06);border-radius:6px;border:1px solid rgba(${r},${g},${b},0.12)"></div></div></div>
+<div class="sc-chip" style="top:38px;right:10px;width:72px;height:48px;animation-delay:${d1}s">
+<div style="height:4px;background:rgba(${r},${g},${b},0.65);border-radius:3px;margin-bottom:4px;width:80%"></div>
+<div style="height:4px;background:rgba(255,255,255,0.12);border-radius:3px;margin-bottom:4px;width:95%"></div>
+<div style="height:4px;background:rgba(255,255,255,0.07);border-radius:3px;width:55%"></div></div>
+<div class="sc-chip" style="bottom:58px;left:10px;width:66px;height:42px;animation-delay:${d2}s">
+<div style="height:4px;background:rgba(${r2},${g2},${b2},0.65);border-radius:3px;margin-bottom:4px;width:75%"></div>
+<div style="height:4px;background:rgba(255,255,255,0.1);border-radius:3px;width:65%"></div></div>
+<div class="sc-overlay"></div></div>
+<div class="sc-info">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.65rem">
+<div><div style="font-size:1rem;font-weight:800;color:#fff;letter-spacing:-0.2px">${cl.name}</div>
+<div style="font-size:0.68rem;color:${cl.a};font-weight:600;margin-top:1px">${cl.url}</div></div>
+<a href="https://${cl.url}" target="_blank" style="width:32px;height:32px;border-radius:50%;background:rgba(${r},${g},${b},0.1);border:1px solid rgba(${r},${g},${b},0.3);display:flex;align-items:center;justify-content:center;color:${cl.a};text-decoration:none;font-size:0.8rem;font-weight:700;flex-shrink:0;transition:all 0.3s" onmouseover="this.style.background='rgba(${r},${g},${b},0.28)'" onmouseout="this.style.background='rgba(${r},${g},${b},0.1)'">↗</a></div>
+<div style="display:flex;gap:0.35rem;flex-wrap:wrap">${cl.tags.map((t,ti)=>`<span style="padding:2px 8px;border-radius:20px;font-size:0.62rem;font-weight:600;background:rgba(${tc[ti][0]},${tc[ti][1]},${tc[ti][2]},0.1);border:1px solid rgba(${tc[ti][0]},${tc[ti][1]},${tc[ti][2]},0.28);color:rgba(${tc[ti][0]},${tc[ti][1]},${tc[ti][2]},1);filter:brightness(1.35)">${t}</span>`).join('')}</div>
+</div></div>`;
+  }
+
+  const slide9=document.getElementById('slide-9');
+  if(!slide9) return;
+
+  slide9.innerHTML=`
+  <div class="orb" style="width:500px;height:500px;background:radial-gradient(circle,rgba(14,165,233,0.07),transparent 70%);top:0;right:0"></div>
+  <div class="orb" style="width:400px;height:400px;background:radial-gradient(circle,rgba(139,92,246,0.06),transparent 70%);bottom:0;left:0;animation-delay:2s"></div>
+  <div class="grid-bg"></div>
+  <div style="position:relative;z-index:1;text-align:center;padding:0 4rem;margin-bottom:2.5rem">
+    <div class="slide-label" style="justify-content:center">Client Showcase</div>
+    <h2 class="section-title">Our Work.<br>Their Success.</h2>
+    <div class="glow-divider" style="margin:1rem auto 0"></div>
+    <p style="color:var(--muted);font-size:0.88rem;margin-top:0.75rem">13 brands. Real websites. Real results.</p>
+  </div>
+  <div style="position:relative;z-index:1">
+    <div style="position:absolute;left:0;top:0;bottom:0;width:80px;background:linear-gradient(90deg,#020818,transparent);z-index:10;pointer-events:none"></div>
+    <div style="position:absolute;right:0;top:0;bottom:0;width:80px;background:linear-gradient(270deg,#020818,transparent);z-index:10;pointer-events:none"></div>
+    <div id="clientTrack" style="display:flex;gap:1.5rem;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding:1.5rem 4rem 2.5rem">
+      ${clients.map((cl,i)=>card(cl,i)).join('')}
+    </div>
+    <button class="sc-nav" onclick="scNav(-1)" style="left:0.75rem">&#8592;</button>
+    <button class="sc-nav" onclick="scNav(1)" style="right:0.75rem">&#8594;</button>
+  </div>
+  <div id="scDots" style="display:flex;justify-content:center;align-items:center;gap:8px;margin-top:1.25rem;position:relative;z-index:1"></div>
+  <div class="slide-counter" style="position:relative;text-align:right;margin-top:2rem;padding:0 4rem"><span>10</span> / 11</div>`;
+
+  // Re-observe for nav dots
+  obs.observe(slide9);
+
+  const track=document.getElementById('clientTrack');
+  const dotsEl=document.getElementById('scDots');
+  const cards=Array.from(track.querySelectorAll('.sc-card'));
+  let cur=0;
+
+  cards.forEach((_,i)=>{
+    const d=document.createElement('button');
+    d.className='sc-dot';
+    d.style.cssText='width:'+(i===0?'22':'7')+'px;height:7px;border-radius:4px;border:none;cursor:pointer;transition:all 0.35s;padding:0;background:'+(i===0?'var(--blue)':'rgba(255,255,255,0.2)');
+    d.onclick=()=>go(i);
+    dotsEl.appendChild(d);
+  });
+
+  function go(i){
+    cur=Math.max(0,Math.min(cards.length-1,i));
+    const cw=cards[0].offsetWidth+24;
+    track.scrollTo({left:cur*cw,behavior:'smooth'});
+    Array.from(dotsEl.children).forEach((d,j)=>{
+      d.style.width=j===cur?'22px':'7px';
+      d.style.background=j===cur?'var(--blue)':'rgba(255,255,255,0.2)';
+    });
+  }
+
+  window.scNav=function(dir){
+    const vis=window.innerWidth<700?1:window.innerWidth<1100?2:3;
+    go(cur+dir*Math.max(1,vis));
+  };
+
+  let tt2;
+  track.addEventListener('scroll',()=>{
+    clearTimeout(tt2);
+    tt2=setTimeout(()=>{
+      const cw=(cards[0]?.offsetWidth||340)+24;
+      const nc=Math.round(track.scrollLeft/cw);
+      if(nc!==cur){cur=nc;Array.from(dotsEl.children).forEach((d,j)=>{d.style.width=j===cur?'22px':'7px';d.style.background=j===cur?'var(--blue)':'rgba(255,255,255,0.2)';});}
+    },60);
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "routes": [
+    { "src": "/", "dest": "/softco_presentation.html" },
+    { "src": "/(.*)", "dest": "/$1" }
+  ]
+}
