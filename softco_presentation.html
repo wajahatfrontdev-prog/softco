@@ -224,7 +224,7 @@
   .sc-nav:hover{background:rgba(14,165,233,0.18);border-color:rgba(14,165,233,0.45);box-shadow:0 0 28px rgba(14,165,233,0.3)}
   .sc-dot{height:7px;border-radius:4px;border:none;cursor:pointer;transition:all 0.35s ease;padding:0}
 
-  /* ── Tablet ────────────────────────────────── */
+  /* ── Tablet ── */
   @media(max-width:900px){
     .slide{padding:5rem 2rem}
     .grid-2,.grid-3,.grid-4{grid-template-columns:1fr}
@@ -235,137 +235,76 @@
     .sc-card{min-width:290px;width:290px}
   }
 
-  /* ── Mobile ─────────────────────────────────── */
+  /* ── Mobile ── */
   @media(max-width:768px){
-    /* Nav */
     nav{padding:0.7rem 1.1rem}
     .nav-logo img{width:52px;height:52px}
     .nav-tag{display:none}
-    .nav-logo > div > div:last-child{display:none}
+    .nav-logo>div>div:last-child{display:none}
 
-    /* Slides */
     .slide{padding:4.5rem 1.25rem 2.5rem}
     #slide-2,#slide-3,#slide-6{padding:4rem 1.25rem 2.5rem !important}
 
-    /* Typography */
     h1.hero-title{font-size:clamp(2rem,9vw,3rem);letter-spacing:-1px;margin-bottom:1rem}
     h2.section-title{font-size:clamp(1.6rem,6vw,2.2rem);letter-spacing:-0.5px}
     .hero-sub{font-size:0.92rem}
 
-    /* Cover logo */
-    #slide-0 img[alt="Softco Digital"]{
-      width:min(300px,82vw) !important;
-      max-width:82vw !important
-    }
+    #slide-0 img[alt="Softco Digital"]{width:min(300px,82vw)!important;max-width:82vw!important}
     .hero-visual{display:none}
 
-    /* Grids → single column */
     .grid-2,.grid-3,.grid-4{grid-template-columns:1fr;gap:1rem}
 
-    /* Key Numbers – 5-col inline grid */
-    #slide-2 [style*="repeat(5"]{
-      grid-template-columns:repeat(2,1fr) !important;
-      gap:0.85rem !important
-    }
-    /* Services – 4-col inline grid */
-    #slide-3 [style*="repeat(4"]{
-      grid-template-columns:repeat(2,1fr) !important;
-      gap:0.85rem !important
-    }
-    /* Marketing – 2fr 1fr inline */
-    #slide-4 [style*="2fr 1fr"]{
-      grid-template-columns:1fr !important
-    }
-    /* Why Choose Us – 3-col inline */
-    #slide-5 [style*="repeat(3"]{
-      grid-template-columns:1fr !important
-    }
-    /* Testimonials – 3-col */
-    #slide-8 [style*="repeat(3"]{
-      grid-template-columns:1fr !important
-    }
-    /* Portfolio – 3-col */
-    #slide-6 [style*="repeat(3"]{
-      grid-template-columns:1fr !important;
-      gap:1rem !important
-    }
-    /* Customers – 2-col inline */
-    #slide-9 [style*="1fr 1.45fr"]{
-      grid-template-columns:1fr !important;
-      gap:0.75rem !important
-    }
+    /* inline grids via attribute selector */
+    #slide-2 [style*="repeat(5"]{grid-template-columns:repeat(2,1fr)!important;gap:0.85rem!important}
+    #slide-3 [style*="repeat(4"]{grid-template-columns:repeat(2,1fr)!important;gap:0.85rem!important}
+    #slide-4 [style*="2fr 1fr"]{grid-template-columns:1fr!important}
+    #slide-5 [style*="repeat(3"]{grid-template-columns:1fr!important}
+    #slide-6 [style*="repeat(3"]{grid-template-columns:1fr!important;gap:1rem!important}
+    #slide-8 [style*="repeat(3"]{grid-template-columns:1fr!important}
+    #slide-9 [style*="1fr 1.45fr"]{grid-template-columns:1fr!important;gap:0.75rem!important}
     #slide-9 [style*="animation:float"]{display:none}
+    #slide-2 [style*="1fr 1fr;gap:2.5"]{grid-template-columns:1fr!important}
 
-    /* Expertise bars */
-    #slide-2 [style*="grid-template-columns:1fr 1fr"]{
-      grid-template-columns:1fr !important
-    }
-
-    /* Stat blocks */
     .stat-number{font-size:2rem}
     .stat-block{padding:1rem}
-
-    /* Cards */
     .glass-card{padding:1.25rem}
     .glow-card{padding:1.2rem}
     .testi-card{padding:1.5rem}
-
-    /* Buttons */
     .btn-primary,.btn-ghost{padding:0.8rem 1.6rem;font-size:0.9rem}
-
-    /* Feature rows */
     .feature-row{gap:0.85rem}
-
-    /* Orbit */
     .orbit-container{width:200px;height:200px}
-
-    /* Scroll hint */
-    .scroll-hint{bottom:1.2rem}
-    .slide-counter{bottom:1.2rem;right:1.5rem}
-
-    /* Client carousel */
+    .scroll-hint,.slide-counter{bottom:1.2rem}
+    .slide-counter{right:1.5rem}
     #clientTrack{padding:1.25rem 1rem 2rem}
     .sc-card{min-width:260px;width:260px}
-
-    /* Contact items */
     .contact-item{padding:1rem 1.25rem}
-
-    /* Mock browser – hide on mobile */
-    .mock-browser{display:none}
-
-    /* Slide-9 customers browser mocks hidden */
-    #slide-9 .mock-browser{display:none}
+    .mock-browser{font-size:0.75rem}
+    #slide-9 [style*="animation"]{display:none!important}
   }
 
-  /* ── Small Mobile ─────────────────────────── */
+  /* ── Small Mobile ── */
   @media(max-width:480px){
     nav{padding:0.6rem 0.9rem}
     .nav-cta{padding:0.38rem 0.9rem;font-size:0.75rem}
     .nav-logo img{width:44px;height:44px}
 
     .slide{padding:4.5rem 1rem 2.5rem}
-    h1.hero-title{font-size:clamp(1.9rem,8vw,2.6rem)}
-    h2.section-title{font-size:clamp(1.5rem,6vw,1.9rem)}
+    h1.hero-title{font-size:clamp(1.9rem,8vw,2.4rem)}
+    h2.section-title{font-size:clamp(1.4rem,6vw,1.8rem)}
 
-    #slide-0 img[alt="Softco Digital"]{
-      width:min(270px,88vw) !important;
-      max-width:88vw !important
-    }
+    #slide-0 img[alt="Softco Digital"]{width:min(260px,88vw)!important;max-width:88vw!important}
 
     .btn-primary,.btn-ghost{padding:0.75rem 1.3rem;font-size:0.85rem;border-radius:40px}
 
-    /* Services – single column on very small */
-    #slide-3 [style*="repeat(4"]{
-      grid-template-columns:1fr !important
-    }
+    #slide-3 [style*="repeat(4"]{grid-template-columns:1fr!important}
+    #slide-3 [style*="repeat(2"]{grid-template-columns:1fr!important}
 
-    /* Key numbers – 2 cols still ok */
     .glow-card p,.glass-card p{font-size:0.8rem}
     .glow-card h3{font-size:0.92rem}
-
     .contact-item{flex-direction:column;align-items:flex-start;gap:0.5rem}
     .testi-text{font-size:0.85rem}
     .portfolio-thumb{height:110px}
+    .slide-counter{font-size:0.65rem}
   }
 </style>
 </head>
